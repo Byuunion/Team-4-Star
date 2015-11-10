@@ -31,11 +31,13 @@ public class InstanceOfData {
 	}
 
 	public String toString() {
-		String ret = ACID + ": \t";
-		for(int i = 0; i < info.size(); i++) {
-			ret += info.get(i) + ", ";
+		StringBuilder sb = new StringBuilder("");
+		sb.append(ACID);
+		sb.append(": ");
+		for(String st: info) {
+			sb.append(" " + st);
 		}
-		return ret;
+		return sb.toString();
 	}
 
 

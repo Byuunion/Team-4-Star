@@ -24,7 +24,9 @@ public class Controller {
 		}
 		
 		Model_Of_Table.printUniverse();
-		Model_Of_Table.filterGalaxy("Star");
+		Model_Of_Table.printGalaxy();
+		Model_Of_Table.filterGalaxy("2");
+		Model_Of_Table.filterGalaxy("11-21");
 		Model_Of_Table.printGalaxy();
 	}
 

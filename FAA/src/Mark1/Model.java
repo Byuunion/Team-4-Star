@@ -71,13 +71,29 @@ public class Model {
 		return Universe_Of_Data.get(index);
 	}
 	
-	public boolean filterGalaxy(String regex) {
+	public boolean filterGalaxy(String str) {
 		boolean hasChanged = false;
-		Pattern pattern = Pattern.compile(regex);
 		for(InstanceOfData dta: Universe_Of_Data) {
-			Matcher matcher = pattern.matcher(dta.toString());
-			if(!matcher.matches()) {
-				System.out.println(matcher.matches());
+			if(!dta.toString().contains(str)) {
+				Galaxy_Of_Data.remove(dta);
+				hasChanged = true;
+			}
+		}
+		return hasChanged;
+	}
+	
+	public boolean filterGalaxy(int index, String str) {
+		boolean hasChanged = false;
+		if(index == 0) {
+			for(InstanceOfData dta: Universe_Of_Data) {
+				if(!dta.toString().contains(str)) {
+					Galaxy_Of_Data.remove(dta);
+					hasChanged = true;
+				}
+			}
+		}
+		for(InstanceOfData dta: Universe_Of_Data) {
+			if(!dta.toString().contains(str)) {
 				Galaxy_Of_Data.remove(dta);
 				hasChanged = true;
 			}
