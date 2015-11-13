@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 public class SQLCommands {
 	
-	private ArrayList<InstanceOfData> List_Of_Data;
+	private ArrayList<InstanceACList> List_Of_Data;
 	private static Connection conn;
 
 	public SQLCommands(String url, String user, String ext) throws SQLException {
-		List_Of_Data = new ArrayList<InstanceOfData>();
+		List_Of_Data = new ArrayList<InstanceACList>();
 		conn = DriverManager.getConnection(url, user, ext);
 	}
 
@@ -22,7 +22,7 @@ public class SQLCommands {
 	}
 	
 	public void clear() {
-		List_Of_Data = new ArrayList<InstanceOfData>();
+		List_Of_Data = new ArrayList<InstanceACList>();
 	}
 	
 	public boolean isClear() {

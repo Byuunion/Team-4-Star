@@ -13,69 +13,85 @@ import java.util.regex.Pattern;
 
 public class Model {
 
-	private static ArrayList<InstanceOfData> Universe_Of_Data;
-	private static ArrayList<InstanceOfData> Galaxy_Of_Data;
+	private static ArrayList<InstanceACList> Array_List_AC_List;
+	private static ArrayList<InstanceACTrack> Universe_AC_Track;
+	private static ArrayList<InstanceACTrack> Galaxy_AC_Track;
+	
+	public Model() {
+		Array_List_AC_List = new ArrayList<InstanceACList>();
+		Universe_AC_Track = new ArrayList<InstanceACTrack>();
+		Galaxy_AC_Track = new ArrayList<InstanceACTrack>();
+	}
 	
 	public Model(File file) throws IOException {
-		Universe_Of_Data = new ArrayList<InstanceOfData>();
-		Galaxy_Of_Data = new ArrayList<InstanceOfData>();
+		Array_List_AC_List = new ArrayList<InstanceACList>();
+		Universe_AC_Track = new ArrayList<InstanceACTrack>();
+		Galaxy_AC_Track = new ArrayList<InstanceACTrack>();
+		try {
+			readFromFile(file);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 		
+	}
+	
+	private void readFromFile(File file) throws IOException {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			String element;
 			String sepparator = ",";
 			while((element = br.readLine()) != null) {
 				String[] temp = element.split(sepparator);
-				Universe_Of_Data.add(new InstanceOfData(temp[0], Arrays.copyOfRange(temp, 1, temp.length)));
+				InstanceACList ACList = new InstanceACList(temp[0], Arrays.copyOfRange(temp, 1, temp.length));
+				Array_List_AC_List.add(ACList);
+				InstanceACTrack ACTrack = Routine.predict(ACList);
+				Universe_AC_Track.add(ACTrack);
+				Galaxy_AC_Track.add(ACTrack);
 			}
-			Galaxy_Of_Data = new ArrayList<InstanceOfData>(Universe_Of_Data);
 			br.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public boolean printUniverse() {
+	public boolean printUniverseACTrack() {
 		System.out.println("-------------------------");
-		if(Universe_Of_Data == null || Universe_Of_Data.size() < 1){
+		if(Array_List_AC_List == null || Array_List_AC_List.size() < 1){
 			System.out.println("Universe - EMPTY");
 			return true;
 		}
-		for(InstanceOfData dta : Universe_Of_Data) {
+		for(InstanceACList dta : Array_List_AC_List) {
 			System.out.println(dta.toString());
 		}
 		return false;
 	}
 	
-	public boolean printGalaxy() {
+	public boolean printGalaxyACTrack() {
 		System.out.println("-------------------------");
-		if(Galaxy_Of_Data == null || Galaxy_Of_Data.size() < 1) {
+		if(Galaxy_AC_Track == null || Galaxy_AC_Track.size() < 1) {
 			System.out.println("Galaxy - EMPTY");
 			return true;
 		}
-		for(InstanceOfData dta : Galaxy_Of_Data) {
+		for(InstanceACTrack dta : Galaxy_AC_Track) {
 			System.out.println(dta.toString());
 		}
 		return false;
 	}
 	
-	public boolean clearUniverse() {
-		if(Universe_Of_Data == null || Universe_Of_Data.size() < 1) {
+	public boolean clearUniverseACTrack() {
+		if(Array_List_AC_List == null || Array_List_AC_List.size() < 1) {
 			return true;
 		}
-		Universe_Of_Data = new ArrayList<InstanceOfData>();
+		Array_List_AC_List = new ArrayList<InstanceACList>();
 		return false;
-	}
-	
-	public InstanceOfData getInstanceUniverseOfData(int index) {
-		return Universe_Of_Data.get(index);
 	}
 	
 	public boolean filterGalaxy(String str) {
 		boolean hasChanged = false;
-		for(InstanceOfData dta: Universe_Of_Data) {
+		for(InstanceACList dta: Array_List_AC_List) {
 			if(!dta.toString().contains(str)) {
-				Galaxy_Of_Data.remove(dta);
+				Galaxy_AC_Track.remove(dta);
 				hasChanged = true;
 			}
 		}
@@ -85,16 +101,16 @@ public class Model {
 	public boolean filterGalaxy(int index, String str) {
 		boolean hasChanged = false;
 		if(index == 0) {
-			for(InstanceOfData dta: Universe_Of_Data) {
+			for(InstanceACList dta: Array_List_AC_List) {
 				if(!dta.toString().contains(str)) {
-					Galaxy_Of_Data.remove(dta);
+					Galaxy_AC_Track.remove(dta);
 					hasChanged = true;
 				}
 			}
 		}
-		for(InstanceOfData dta: Universe_Of_Data) {
+		for(InstanceACList dta: Array_List_AC_List) {
 			if(!dta.toString().contains(str)) {
-				Galaxy_Of_Data.remove(dta);
+				Galaxy_AC_Track.remove(dta);
 				hasChanged = true;
 			}
 		}
