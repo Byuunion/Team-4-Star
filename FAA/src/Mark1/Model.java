@@ -7,20 +7,21 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Model {
 
 	private static ArrayList<InstanceACList> Array_List_AC_List;
 	private static ArrayList<InstanceACTrack> Universe_AC_Track;
 	private static ArrayList<InstanceACTrack> Galaxy_AC_Track;
+	private static ArrayList<InstanceFuseData> Array_List_Fuse;
+	private InstanceACList AC_List;
+	private InstanceACTrack AC_Track;
 	
 	public Model() {
 		Array_List_AC_List = new ArrayList<InstanceACList>();
 		Universe_AC_Track = new ArrayList<InstanceACTrack>();
 		Galaxy_AC_Track = new ArrayList<InstanceACTrack>();
+		Array_List_Fuse = new ArrayList<InstanceFuseData>();
 	}
 	
 	public Model(File file) throws IOException {
@@ -33,7 +34,18 @@ public class Model {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+	}
+	
+	public void setACList(InstanceACList AC_List){
+		this.AC_List = AC_List;
+	}
+	
+	public InstanceACList getACList() {
+		return AC_List;
+	}
+	
+	public InstanceACTrack getACTrack() {
+		return AC_Track;
 	}
 	
 	private void readFromFile(File file) throws IOException {
@@ -47,17 +59,18 @@ public class Model {
 				Array_List_AC_List.add(ACList);
 				InstanceACTrack ACTrack = Routine.predict(ACList);
 				Universe_AC_Track.add(ACTrack);
+				System.out.println(ACTrack);
 				Galaxy_AC_Track.add(ACTrack);
 			}
 			br.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			throw e;
 		}
 	}
 
 	public boolean printUniverseACTrack() {
 		System.out.println("-------------------------");
-		if(Array_List_AC_List == null || Array_List_AC_List.size() < 1){
+		if(Universe_AC_Track == null || Universe_AC_Track.size() < 1){
 			System.out.println("Universe - EMPTY");
 			return true;
 		}
@@ -117,5 +130,16 @@ public class Model {
 		return hasChanged;
 	}
 	
-	
+	public void populateFuseData() {
+		for(int i = 0; i < Array_List_AC_List.size(); i++) {
+			String AC_NUM = Array_List_AC_List.get(i).getAC_NUM();
+			ArrayList<String> info = new ArrayList<String>(Array_List_AC_List.get(i).getInfo());
+			
+			InstanceFuseData temp;
+			/**
+			 * STUB
+			 */
+			temp = new InstanceFuseData(AC_NUM, )
+		}
+	}
 }
