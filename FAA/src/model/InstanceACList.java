@@ -1,14 +1,14 @@
-package Mark1;
+package model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class InstanceACTrack {
-
+public class InstanceACList {
+	
 	private String AC_NUM;
 	private ArrayList<String> info;
 	
-	public InstanceACTrack(String AC_NUM, String[] info) {
+	public InstanceACList(String AC_NUM, String[] info) {
 		this.AC_NUM = AC_NUM;
 		this.info = new ArrayList<String>(Arrays.asList(info));
 		
@@ -28,6 +28,10 @@ public class InstanceACTrack {
 
 	public void setInfo(ArrayList<String> info) {
 		this.info = info;
+	}
+	
+	public String getInfoElement(int index) {
+		return info.get(index);
 	}
 
 	public String toString() {

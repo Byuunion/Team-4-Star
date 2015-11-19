@@ -1,4 +1,4 @@
-package Mark1;
+package ui;
 
 import java.awt.Graphics;
 import java.awt.Image;

@@ -1,4 +1,4 @@
-package Mark1;
+package model;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

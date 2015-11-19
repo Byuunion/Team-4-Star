@@ -1,4 +1,4 @@
-package Mark1;
+package model;
 
 public class InstanceFuseData {
 	
