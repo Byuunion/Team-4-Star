@@ -3,23 +3,23 @@ package Mark1;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class InstanceOfData {
+public class InstanceACList {
 	
-	private String ACID;
+	private String AC_NUM;
 	private ArrayList<String> info;
 	
-	public InstanceOfData(String ACID, String[] info) {
-		this.ACID = ACID;
+	public InstanceACList(String AC_NUM, String[] info) {
+		this.AC_NUM = AC_NUM;
 		this.info = new ArrayList<String>(Arrays.asList(info));
 		
 	}
 	
-	public String getACID() {
-		return ACID;
+	public String getAC_NUM() {
+		return AC_NUM;
 	}
 
-	public void setACID(String ACID) {
-		this.ACID = ACID;
+	public void setAC_NUM(String AC_NUM) {
+		this.AC_NUM = AC_NUM;
 	}
 
 	public ArrayList<String> getInfo() {
@@ -29,10 +29,14 @@ public class InstanceOfData {
 	public void setInfo(ArrayList<String> info) {
 		this.info = info;
 	}
+	
+	public String getInfoElement(int index) {
+		return info.get(index);
+	}
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder("");
-		sb.append(ACID);
+		sb.append(AC_NUM);
 		sb.append(": ");
 		for(String st: info) {
 			sb.append(" " + st);

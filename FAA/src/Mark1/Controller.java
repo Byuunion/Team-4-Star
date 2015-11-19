@@ -23,11 +23,10 @@ public class Controller {
 			Model_Of_Table = new Model(file);
 		}
 		
-		Model_Of_Table.printUniverse();
-		Model_Of_Table.printGalaxy();
-		Model_Of_Table.filterGalaxy("2");
-		Model_Of_Table.filterGalaxy("11-21");
-		Model_Of_Table.printGalaxy();
+		Model_Of_Table.printUniverseACTrack();
+		Model_Of_Table.printGalaxyACTrack();
+		Model_Of_Table.filterGalaxy("1");
+		Model_Of_Table.printGalaxyACTrack();
 	}
 
 }
