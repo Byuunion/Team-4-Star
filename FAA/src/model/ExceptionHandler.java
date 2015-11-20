@@ -2,9 +2,9 @@ package model;
 
 import java.io.*;
 
-public abstract class ExceptionHanlder {
+public abstract class ExceptionHandler {
 	
-	public static void Handle(Exception e) {
+	public static void Handler(Exception e) {
 		if(e.instanceOf(FileNotFoundException)) {
 			//respond
 		}
