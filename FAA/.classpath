@@ -13,5 +13,6 @@
 	<classpathentry kind="lib" path="JFreeChart/lib/orsonpdf-1.6-eval.jar"/>
 	<classpathentry kind="lib" path="JFreeChart/lib/servlet.jar"/>
 	<classpathentry kind="lib" path="JFreeChart/lib/swtgraphics2d.jar"/>
+	<classpathentry kind="lib" path="src/model/ojdbc6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
