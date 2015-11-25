@@ -16,31 +16,40 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.StringBuilder;
 import java.sql.*;
+import java.util.Scanner;
 
 public class SQLDriver {
 
-	public void main(String args[]) throws SQLException, IOException {
-
+	public static void main(String args[]) throws SQLException, IOException {
+                Scanner sc = new Scanner(System.in);
                 
-                File file = new File("/home/rowan_user/custom.txt");
+                System.out.print("Enter a scenario: ");
+                String scenario = sc.nextLine();
+                
+                File file = new File("/home/rowan_user/" + scenario + ".csv");
                 
                 if(!file.exists()){
                     file.createNewFile();
-
-                
+                    System.out.println("File Created");
                 }
-                FileWriter fileWriter = new FileWriter(file);
                 
-                fileWriter.write("test");
+                FileWriter writer = new FileWriter(file);
                 
                 
             
 
 		SQLCommands sqc = new SQLCommands();
-		System.out.println("test");
-		String url = "jdbc:sqlplus:cablocal";
-		Connection con = DriverManager.getConnection(url, "uret01", "rowan");
-		sqc.viewTable(con, "pariphae_cablocal");
+		
                 
+		String url = "jdbc:oracle:thin:@//localhost:1521/cablocal";
+		Connection conn = DriverManager.getConnection(url, "uret01", "rowan");
+		
+		sqc.setScenario(scenario);
+		sqc.setConnection(conn);
+		sqc.queryTable();
+                
+                writer.write(sqc.getReturnedString());
+                writer.flush();
+                writer.close();
 	}
 }
