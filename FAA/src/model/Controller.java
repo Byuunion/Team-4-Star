@@ -17,7 +17,7 @@ public class Controller {
 		System.out.println(file.getAbsolutePath());
 		
 		if(args.length <= 0 || file == null)  {
-			System.out.println("ERROR: try another file");
+			throw new IOException("FileNotFoundException");
 		}
 		else {
 			Model_Of_Table = new Model(file);

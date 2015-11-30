@@ -1,15 +1,22 @@
 package model;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
-import java.io.*;
 
 public abstract class ExceptionHandler {
 	
-	public static void Handler(Exception e) {
-		if(e.instanceOf(FileNotFoundException)) {
+	public ExceptionHandler (String e){
+		 
+	
+
+		if(e == "FileNotFoundException") {
 			//respond
 		}
-		if(e.instanceOf(StackException)) {
+		if(e== "StackException") {
 			//response
+		}
+		if(e == "ArrayIndexOutOfBoundsException"){
+			//some response
 		}
 	}
 

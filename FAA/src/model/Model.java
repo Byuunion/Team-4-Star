@@ -7,12 +7,17 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EmptyStackException;
+
+import model.InstanceACTrack;
+
 
 public class Model {
 
 	private static ArrayList<InstanceACList> Array_List_AC_List;
 	private static ArrayList<InstanceACTrack> Universe_AC_Track;
 	private static ArrayList<InstanceACTrack> Galaxy_AC_Track;
+	@SuppressWarnings("unused")
 	private static ArrayList<InstanceFuseData> Array_List_Fuse;
 	private InstanceACList AC_List;
 	private InstanceACTrack AC_Track;
@@ -68,9 +73,9 @@ public class Model {
 		}
 	}
 
-	public boolean printUniverseACTrack() {
+	public boolean printUniverseACTrack()throws EmptyStackException {
 		System.out.println("-------------------------");
-		if(Universe_AC_Track == null || Universe_AC_Track.size() < 1){
+		if(isUniverseACTrackClear()){
 			System.out.println("Universe - EMPTY");
 			return true;
 		}
@@ -80,9 +85,9 @@ public class Model {
 		return false;
 	}
 	
-	public boolean printGalaxyACTrack() {
+	public boolean printGalaxyACTrack()throws EmptyStackException {
 		System.out.println("-------------------------");
-		if(Galaxy_AC_Track == null || Galaxy_AC_Track.size() < 1) {
+		if(isGalaxyACTrackClear()) {
 			System.out.println("Galaxy - EMPTY");
 			return true;
 		}
@@ -92,12 +97,40 @@ public class Model {
 		return false;
 	}
 	
-	public boolean clearUniverseACTrack() {
+	
+	
+	private boolean isGalaxyACTrackClear() {
+		if(Galaxy_AC_Track == null || Galaxy_AC_Track.size() < 1) {
+			return true;
+		}
+			return false;
+		}
+	
+	
+	public void clearUniverseACTrack(){
+		if(isUniverseACTrackClear()== false){
+		Array_List_AC_List = new ArrayList<InstanceACList>();
+		}else{
+			return;
+		}
+		
+	}
+	
+	private boolean isUniverseACTrackClear() {
 		if(Array_List_AC_List == null || Array_List_AC_List.size() < 1) {
 			return true;
 		}
+			return false;
+		}
+	
+	
+	public void clearGalaxyACTrack(){
+		if(isGalaxyACTrackClear()== false){
 		Array_List_AC_List = new ArrayList<InstanceACList>();
-		return false;
+		}else{
+			return;
+		}
+		
 	}
 	
 	public boolean filterGalaxy(String str) {
@@ -130,16 +163,4 @@ public class Model {
 		return hasChanged;
 	}
 	
-	public void populateFuseData() {
-		for(int i = 0; i < Array_List_AC_List.size(); i++) {
-			String AC_NUM = Array_List_AC_List.get(i).getAC_NUM();
-			ArrayList<String> info = new ArrayList<String>(Array_List_AC_List.get(i).getInfo());
-			
-			InstanceFuseData temp;
-			/**
-			 * STUB
-			 */
-			temp = new InstanceFuseData(AC_NUM, )
-		}
-	}
 }
