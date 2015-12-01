@@ -8,26 +8,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+// readFromFile stub
+
 public class Model {
 
-	private static ArrayList<InstanceACList> Array_List_AC_List;
-	private static ArrayList<InstanceACTrack> Universe_AC_Track;
-	private static ArrayList<InstanceACTrack> Galaxy_AC_Track;
-	private static ArrayList<InstanceFuseData> Array_List_Fuse;
-	private InstanceACList AC_List;
-	private InstanceACTrack AC_Track;
+	private static ArrayList<InstanceFuseData> universeFuseData;
+	private static ArrayList<InstanceFuseData> galaxyFuseData;
+
+	private InstanceFuseData AC_List;
+	private InstanceFuseData AC_Track;
 	
 	public Model() {
-		Array_List_AC_List = new ArrayList<InstanceACList>();
-		Universe_AC_Track = new ArrayList<InstanceACTrack>();
-		Galaxy_AC_Track = new ArrayList<InstanceACTrack>();
-		Array_List_Fuse = new ArrayList<InstanceFuseData>();
+		universeFuseData = new ArrayList<InstanceFuseData>();
+		galaxyFuseData = new ArrayList<InstanceFuseData>();
 	}
 	
 	public Model(File file) throws IOException {
-		Array_List_AC_List = new ArrayList<InstanceACList>();
-		Universe_AC_Track = new ArrayList<InstanceACTrack>();
-		Galaxy_AC_Track = new ArrayList<InstanceACTrack>();
+		universeFuseData = new ArrayList<InstanceFuseData>();
+		galaxyFuseData = new ArrayList<InstanceFuseData>();
 		try {
 			readFromFile(file);
 		}
@@ -36,15 +34,15 @@ public class Model {
 		}
 	}
 	
-	public void setACList(InstanceACList AC_List){
+	public void setACList(InstanceFuseData AC_List){
 		this.AC_List = AC_List;
 	}
 	
-	public InstanceACList getACList() {
+	public InstanceFuseData getACList() {
 		return AC_List;
 	}
 	
-	public InstanceACTrack getACTrack() {
+	public InstanceFuseData getACTrack() {
 		return AC_Track;
 	}
 	
@@ -55,12 +53,12 @@ public class Model {
 			String sepparator = ",";
 			while((element = br.readLine()) != null) {
 				String[] temp = element.split(sepparator);
-				InstanceACList ACList = new InstanceACList(temp[0], Arrays.copyOfRange(temp, 1, temp.length));
-				Array_List_AC_List.add(ACList);
-				InstanceACTrack ACTrack = Routine.predict(ACList);
-				Universe_AC_Track.add(ACTrack);
+				InstanceFuseData ACList = new InstanceFuseData(temp[0], Arrays.copyOfRange(temp, 1, temp.length));
+				universeFuseData.add(ACList);
+				InstanceFuseData ACTrack = Routine.predict(ACList);
+				universeFuseData.add(ACTrack);
 				System.out.println(ACTrack);
-				Galaxy_AC_Track.add(ACTrack);
+				galaxyFuseData.add(ACTrack);
 			}
 			br.close();
 		} catch (FileNotFoundException e) {
@@ -70,11 +68,11 @@ public class Model {
 
 	public boolean printUniverseACTrack() {
 		System.out.println("-------------------------");
-		if(Universe_AC_Track == null || Universe_AC_Track.size() < 1){
+		if(universeFuseData == null || universeFuseData.size() < 1){
 			System.out.println("Universe - EMPTY");
 			return true;
 		}
-		for(InstanceACList dta : Array_List_AC_List) {
+		for(InstanceFuseData dta : universeFuseData) {
 			System.out.println(dta.toString());
 		}
 		return false;
@@ -82,29 +80,29 @@ public class Model {
 	
 	public boolean printGalaxyACTrack() {
 		System.out.println("-------------------------");
-		if(Galaxy_AC_Track == null || Galaxy_AC_Track.size() < 1) {
+		if(galaxyFuseData == null || galaxyFuseData.size() < 1) {
 			System.out.println("Galaxy - EMPTY");
 			return true;
 		}
-		for(InstanceACTrack dta : Galaxy_AC_Track) {
+		for(InstanceFuseData dta : galaxyFuseData) {
 			System.out.println(dta.toString());
 		}
 		return false;
 	}
 	
 	public boolean clearUniverseACTrack() {
-		if(Array_List_AC_List == null || Array_List_AC_List.size() < 1) {
+		if(universeFuseData == null || universeFuseData.size() < 1) {
 			return true;
 		}
-		Array_List_AC_List = new ArrayList<InstanceACList>();
+		universeFuseData = new ArrayList<InstanceFuseData>();
 		return false;
 	}
 	
 	public boolean filterGalaxy(String str) {
 		boolean hasChanged = false;
-		for(InstanceACList dta: Array_List_AC_List) {
+		for(InstanceFuseData dta: universeFuseData) {
 			if(!dta.toString().contains(str)) {
-				Galaxy_AC_Track.remove(dta);
+				galaxyFuseData.remove(dta);
 				hasChanged = true;
 			}
 		}
@@ -114,32 +112,19 @@ public class Model {
 	public boolean filterGalaxy(int index, String str) {
 		boolean hasChanged = false;
 		if(index == 0) {
-			for(InstanceACList dta: Array_List_AC_List) {
+			for(InstanceFuseData dta: universeFuseData) {
 				if(!dta.toString().contains(str)) {
-					Galaxy_AC_Track.remove(dta);
+					galaxyFuseData.remove(dta);
 					hasChanged = true;
 				}
 			}
 		}
-		for(InstanceACList dta: Array_List_AC_List) {
+		for(InstanceFuseData dta: universeFuseData) {
 			if(!dta.toString().contains(str)) {
-				Galaxy_AC_Track.remove(dta);
+				galaxyFuseData.remove(dta);
 				hasChanged = true;
 			}
 		}
 		return hasChanged;
-	}
-	
-	public void populateFuseData() {
-		for(int i = 0; i < Array_List_AC_List.size(); i++) {
-			String AC_NUM = Array_List_AC_List.get(i).getAC_NUM();
-			ArrayList<String> info = new ArrayList<String>(Array_List_AC_List.get(i).getInfo());
-			
-			InstanceFuseData temp;
-			/**
-			 * STUB
-			 */
-			temp = new InstanceFuseData(AC_NUM, )
-		}
 	}
 }
