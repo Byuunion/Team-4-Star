@@ -70,7 +70,7 @@ public class SQLCommands {
 	public static void queryTable() throws SQLException {
 		Statement stmt, stmt2 = null;
                 int Max_Z, Min_Z;
-                double minTime, maxTime, elapseTime, minGSpeed, maxGSpeed, avgClimbSpeed;
+                int minTime, maxTime, elapseTime, minGSpeed, maxGSpeed, avgClimbSpeed;
                 boolean minNotFound, maxNotFound;
 		StringBuilder sb = new StringBuilder();
 		// SELECT COUNT(*) FROM AC_TRKSRW15150804 WHERE Z_Value = 32000 AND AC_NUM = 50;
@@ -218,27 +218,6 @@ public class SQLCommands {
 			if (stmt2 != null) {
 				stmt2.close();
 			}
-		}
-                
-                
-	}
-
-	public static void viewTable(Connection con, String dbName, String colName) throws SQLException {
-		Statement stmt = null;
-		String query = "select " + colName + " from " + dbName + ".AC_LIST";
-		try {
-			stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(query);
-			while (rs.next()) {
-				String acid = rs.getString("colName");
-				System.out.println(acid);
-			}
-		} catch (SQLException e) {
-			System.err.println(e.toString());
-		} finally {
-			if (stmt != null) {
-				stmt.close();
-			}
-		}
+		}           
 	}
 }
