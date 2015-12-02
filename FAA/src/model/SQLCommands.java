@@ -24,10 +24,10 @@ public class SQLCommands {
 	// private ArrayList<InstanceOfData> List_Of_Data;
 	private static String scenario;
         
-        private static HashSet<Integer> mostCommonZs;
-        
-        public SQLCommands() {
-		mostCommonZs = new HashSet<Integer>();
+    private static HashSet<Integer> mostCommonZs;
+    
+    public SQLCommands() {
+    	mostCommonZs = new HashSet<Integer>();
 	}
 
 	public static Connection getConnection() {
@@ -69,9 +69,9 @@ public class SQLCommands {
 
 	public static void queryTable() throws SQLException {
 		Statement stmt, stmt2 = null;
-                int Max_Z, Min_Z;
-                int minTime, maxTime, elapseTime, minGSpeed, maxGSpeed, avgClimbSpeed;
-                boolean minNotFound, maxNotFound;
+        int Max_Z, Min_Z;
+        int minTime, maxTime, elapseTime, minGSpeed, maxGSpeed, avgClimbSpeed;
+        boolean minNotFound, maxNotFound;
 		StringBuilder sb = new StringBuilder();
 		// SELECT COUNT(*) FROM AC_TRKSRW15150804 WHERE Z_Value = 32000 AND AC_NUM = 50;
 		// AC_TRKSRW15150804 AC_LISTRW15150804
@@ -80,7 +80,7 @@ public class SQLCommands {
 		String query = "SELECT * FROM AC_LISTRW" + scenario;
 		try {
 			stmt = conn.createStatement();
-                        stmt2 = conn.createStatement();
+            stmt2 = conn.createStatement();
 			ResultSet listSet = stmt.executeQuery(query);
                         sb.append("AC_NUM, " + 
                                     "ACID, " + 
@@ -131,90 +131,90 @@ public class SQLCommands {
                                 
 				Max_Z = 0;
 				Min_Z = 0;
-                                minNotFound = true;
-                                maxNotFound = true;
-                                minTime = 0;
-                                maxTime = 0;
-                                elapseTime = 0;
-                                minGSpeed = 0;
-                                maxGSpeed = 0;
+                minNotFound = true;
+                maxNotFound = true;
+                minTime = 0;
+                maxTime = 0;
+                elapseTime = 0;
+                minGSpeed = 0;
+                maxGSpeed = 0;
                                 
 				while(Track_Nums.next()) {
                                     
-                                        // Take the first value as min
-                                        // compare it with max Z
+                    // Take the first value as min
+                    // compare it with max Z
 					if(minNotFound) {
 						Min_Z = Track_Nums.getInt("Z_VALUE");
-                                                minTime = Track_Nums.getInt("ELAP_TIME"); 
-                                                minGSpeed = Track_Nums.getInt("GROUND_SPEED_SMO");
-                                                minNotFound = false;
+	                    minTime = Track_Nums.getInt("ELAP_TIME"); 
+	                    minGSpeed = Track_Nums.getInt("GROUND_SPEED_SMO");
+	                    minNotFound = false;
 					}
-                                        if(Track_Nums.getInt("Z_VALUE") <= Max_Z && maxNotFound == true){
-						maxNotFound = false;
-                                      
-                                        }
-                                        if(Track_Nums.getInt("Z_VALUE") > Max_Z && maxNotFound == true){
-                                            Max_Z = Track_Nums.getInt("Z_VALUE");
-                                            maxTime = Track_Nums.getInt("ELAP_TIME");
-                                            maxGSpeed = Track_Nums.getInt("GROUND_SPEED_SMO");
-        
-                                        }
-                                        
-                                        
+					
+                    if(Track_Nums.getInt("Z_VALUE") <= Max_Z && maxNotFound == true){
+                		maxNotFound = false;
+                    }
+                    
+                    if(Track_Nums.getInt("Z_VALUE") > Max_Z && maxNotFound == true){
+                        Max_Z = Track_Nums.getInt("Z_VALUE");
+                        maxTime = Track_Nums.getInt("ELAP_TIME");
+                        maxGSpeed = Track_Nums.getInt("GROUND_SPEED_SMO");
+                    }                               
 				}
                                 
-                                elapseTime = maxTime - minTime;
-                                avgClimbSpeed = Math.abs((maxGSpeed - minGSpeed)/elapseTime);
+                    elapseTime = maxTime - minTime;
+                    avgClimbSpeed = Math.abs((maxGSpeed - minGSpeed)/elapseTime);
                                 
-                                if(Min_Z + 3000 < Max_Z){
-                                    sb.append(listSet.getString("AC_NUM")).append(", ")
-                                            .append(listSet.getString("ACID")).append(", ")
-                                            .append(listSet.getString("TRACK_CNT")).append(", ")
-                                            .append(listSet.getString("ST_TIME")).append(", ")
-                                            .append(listSet.getString("END_TIME")).append(", ")
-                                            .append(listSet.getString("ORIG_ST_TIME")).append(", ")
-                                            .append(listSet.getString("ORIG_END_TIME")).append(", ")
-                                            .append(listSet.getString("MAX_X")).append(", ")
-                                            .append(listSet.getString("MIN_X")).append(", ")
-                                            .append(listSet.getString("MAX_Y")).append(", ")
-                                            .append(listSet.getString("MIN_Y")).append(", ")
-                                            .append(listSet.getString("MAX_Z")).append(", ")
-                                            .append(listSet.getString("MIN_Z")).append(", ")
-                                            .append(listSet.getString("AC_EQUIP")).append(", ")
-                                            .append(listSet.getString("AC_TYPE")).append(", ")
-                                            .append(listSet.getString("DEST_FIX")).append(", ")
-                                            .append(listSet.getString("FLIGHT_TYPE")).append(", ")
-                                            .append(listSet.getString("ORIGIN_FIX")).append(", ")
-                                            .append(listSet.getString("GAP_VALUE")).append(", ")
-                                            .append(listSet.getString("MAX_X_SMO")).append(", ")
-                                            .append(listSet.getString("MIN_X_SMO")).append(", ")
-                                            .append(listSet.getString("MAX_Y_SMO")).append(", ")
-                                            .append(listSet.getString("MIN_Y_SMO")).append(", ")
-                                            .append(listSet.getString("MAX_Z_SMO")).append(", ")
-                                            .append(listSet.getString("MIN_Z_SMO")).append(", ")
-                                            .append(listSet.getString("TOD_TIME")).append(", ")
-                                            .append(listSet.getString("TOC_TIME")).append(", ")
-                                            .append(listSet.getString("TOC_ALT")).append(", ")
-                                            .append(listSet.getString("END_CENTER")).append(", ")
-                                            .append(listSet.getString("START_CENTER")).append(", ")
-                                            .append(listSet.getString("END_CENTER_TIME")).append(", ")
-                                            .append(listSet.getString("START_CENTER_TIME")).append(", ")
-                                            .append(Min_Z).append(", ")
-                                            .append(Max_Z).append(", ")
-                                            .append(minTime).append(", ")
-                                            .append(maxTime).append(", ")
-                                            .append(elapseTime).append(", ")
-                                            .append(avgClimbSpeed).append(", ")
-                                            .append(minGSpeed).append(", ")
-                                            .append(maxGSpeed).append("\n");
-                                }
+                    if(Min_Z + 3000 < Max_Z){
+                        sb.append(listSet.getString("AC_NUM")).append(", ")
+                                .append(listSet.getString("ACID")).append(", ")
+                                .append(listSet.getString("TRACK_CNT")).append(", ")
+                                .append(listSet.getString("ST_TIME")).append(", ")
+                                .append(listSet.getString("END_TIME")).append(", ")
+                                .append(listSet.getString("ORIG_ST_TIME")).append(", ")
+                                .append(listSet.getString("ORIG_END_TIME")).append(", ")
+                                .append(listSet.getString("MAX_X")).append(", ")
+                                .append(listSet.getString("MIN_X")).append(", ")
+                                .append(listSet.getString("MAX_Y")).append(", ")
+                                .append(listSet.getString("MIN_Y")).append(", ")
+                                .append(listSet.getString("MAX_Z")).append(", ")
+                                .append(listSet.getString("MIN_Z")).append(", ")
+                                .append(listSet.getString("AC_EQUIP")).append(", ")
+                                .append(listSet.getString("AC_TYPE")).append(", ")
+                                .append(listSet.getString("DEST_FIX")).append(", ")
+                                .append(listSet.getString("FLIGHT_TYPE")).append(", ")
+                                .append(listSet.getString("ORIGIN_FIX")).append(", ")
+                                .append(listSet.getString("GAP_VALUE")).append(", ")
+                                .append(listSet.getString("MAX_X_SMO")).append(", ")
+                                .append(listSet.getString("MIN_X_SMO")).append(", ")
+                                .append(listSet.getString("MAX_Y_SMO")).append(", ")
+                                .append(listSet.getString("MIN_Y_SMO")).append(", ")
+                                .append(listSet.getString("MAX_Z_SMO")).append(", ")
+                                .append(listSet.getString("MIN_Z_SMO")).append(", ")
+                                .append(listSet.getString("TOD_TIME")).append(", ")
+                                .append(listSet.getString("TOC_TIME")).append(", ")
+                                .append(listSet.getString("TOC_ALT")).append(", ")
+                                .append(listSet.getString("END_CENTER")).append(", ")
+                                .append(listSet.getString("START_CENTER")).append(", ")
+                                .append(listSet.getString("END_CENTER_TIME")).append(", ")
+                                .append(listSet.getString("START_CENTER_TIME")).append(", ")
+                                .append(Min_Z).append(", ")
+                                .append(Max_Z).append(", ")
+                                .append(minTime).append(", ")
+                                .append(maxTime).append(", ")
+                                .append(elapseTime).append(", ")
+                                .append(avgClimbSpeed).append(", ")
+                                .append(minGSpeed).append(", ")
+                                .append(maxGSpeed).append("\n");
+                    }
 			}
-                        setReturnedString(sb.toString());
+            setReturnedString(sb.toString());
 		} 
-                catch (SQLException e) {
+		
+        catch (SQLException e) {
 			System.err.println(e.toString());
 		} 
-                finally {
+		
+        finally {
 			if (stmt2 != null) {
 				stmt2.close();
 			}
