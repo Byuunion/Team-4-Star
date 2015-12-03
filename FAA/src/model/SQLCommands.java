@@ -11,8 +11,6 @@ package model;
  * @author rowan_user
  */
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Set;
 import java.lang.StringBuilder;
 import java.util.HashSet;
 import java.lang.Math;
@@ -30,10 +28,18 @@ public class SQLCommands {
     	mostCommonZs = new HashSet<Integer>();
 	}
 
+    /**Returns the connection object
+     * @author Robert Seedorf
+     * @return
+     */
 	public static Connection getConnection() {
 		return conn;
 	}
 
+	/**Sets the connection object
+	 * @author Robert Seedorf
+	 * @param conn
+	 */
 	public static void setConnection(Connection conn) {
 		SQLCommands.conn = conn;
 	}
@@ -50,14 +56,13 @@ public class SQLCommands {
 		return returnedString;
 	}
         
-        public static void setReturnedString(String str) {
-		returnedString = str;
+    public static void setReturnedString(String str) {
+    	returnedString = str;
 	}
 
 	
-
 	public void clear() {
-		// List_Of_Data = new ArrayList<InstanceOfData>();
+		returnedString = null;
 	}
 
 	public boolean isClear() {
@@ -66,7 +71,15 @@ public class SQLCommands {
 		// }
 		return false;
 	}
-
+	
+	/** Queries table to build csv file
+	 *  Uses a ResultSet for the result a query
+	 *  String is built from the ResultSet
+	 *  This method depends on the java.util.StringBuffer
+	 *  @author Benson Xu
+	 *  @throws SQLException
+	 */
+	
 	public static void queryTable() throws SQLException {
 		Statement stmt, stmt2 = null;
         int Max_Z, Min_Z;
