@@ -17,34 +17,42 @@ public class InformationPanel extends JPanel
 
 
 	public InformationPanel()	
-	{		
+	{
 		TitledBorder centerBorder = BorderFactory.createTitledBorder("Flight Data");
 		centerBorder.setTitleJustification(TitledBorder.CENTER);
 		setBorder(centerBorder);
-		
+
 		setLayout(new BorderLayout());
 
-		
 		textArea = new JTextArea();
 		textArea.setBorder(BorderFactory.createEtchedBorder());
 		textArea.setBackground(Color.LIGHT_GRAY);
-		textArea.setFont(new Font("Serif", Font.BOLD, 14));
+		textArea.setFont(new Font("Serif", Font.PLAIN, 12));
 		textArea.setLineWrap(false);
 		textArea.setWrapStyleWord(true);
 		textArea.setEditable(false);
 		textArea.setVisible(true);
 
 		JScrollPane pane = new JScrollPane(textArea, 
-				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, 
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
 		pane.setPreferredSize(getMinimumSize());
 		pane.setVisible(true);		
 		add(pane, BorderLayout.CENTER);
 		setVisible(true);
 	}
-	
+
+
 	public JTextArea getPanelTextArea()
 	{
 		return textArea;
 	}
+
+
+	public void setPanelTextArea(String string)
+	{
+		textArea.setText(string);
+	}
+
 }
