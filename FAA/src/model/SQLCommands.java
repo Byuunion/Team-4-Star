@@ -12,6 +12,7 @@ package model;
  */
 import java.sql.*;
 import java.lang.StringBuilder;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.lang.Math;
 
@@ -19,6 +20,7 @@ public class SQLCommands {
 
 	private static String returnedString;
 	private static Connection conn;
+	
 	// private ArrayList<InstanceOfData> List_Of_Data;
 	private static String scenario;
         
@@ -72,6 +74,22 @@ public class SQLCommands {
 		return false;
 	}
 	
+	//Enter Query. Returns resultset
+	public ResultSet query(String query) throws SQLException{
+		Statement stmt = null;
+		stmt = conn.createStatement();
+		return stmt.executeQuery(query);
+	}
+	
+	//Pulls all queries of element from result set
+	public ArrayList<String> pull(String element, ResultSet rs) throws SQLException{
+		ArrayList<String> list = new ArrayList<String>();
+		while (rs.next()) {
+			list.add(rs.getString(element));
+		}
+		return list;
+	}
+	
 	/** Queries table to build csv file
 	 *  Uses a ResultSet for the result a query
 	 *  String is built from the ResultSet
@@ -81,6 +99,8 @@ public class SQLCommands {
 	 */
 	
 	public static void queryTable() throws SQLException {
+		ArrayList<InstanceFuseData> row = new ArrayList<InstanceFuseData>();
+		ArrayList<String> ac_Data = new ArrayList<String>();
 		Statement stmt, stmt2 = null;
         int Max_Z, Min_Z;
         int minTime, maxTime, elapseTime, minGSpeed, maxGSpeed, avgClimbSpeed;
@@ -95,46 +115,6 @@ public class SQLCommands {
 			stmt = conn.createStatement();
             stmt2 = conn.createStatement();
 			ResultSet listSet = stmt.executeQuery(query);
-                        sb.append("AC_NUM, " + 
-                                    "ACID, " + 
-                                    "TRACK_CNT, " + 
-                                    "ST_TIME, " + 
-                                    "END_TIME, " + 
-                                    "ORIG_ST_TIME, " + 
-                                    "END_ST_TIME, " + 
-                                    "MAX_X, " + 
-                                    "MIN_X, " + 
-                                    "MAX_Y, " + 
-                                    "MIN_Y, " + 
-                                    "MAX_Z, " + 
-                                    "MIN_Z, " + 
-                                    "AC_EQUIP, " + 
-                                    "AC_TYPE, " + 
-                                    "DEST_FIX, " + 
-                                    "FLIGHT_TYPE, " + 
-                                    "ORIGIN_FIX, " + 
-                                    "GAP_VALUE, " + 
-                                    "MAX_X_SMO, " + 
-                                    "MIN_X_SMO, " + 
-                                    "MAX_Y_SMO, " + 
-                                    "MIN_Y_SMO, " + 
-                                    "MAX_Z_SMO, " + 
-                                    "MIN_Z_SMO, " + 
-                                    "TOD_TIME, " + 
-                                    "TOC_TIME, " + 
-                                    "TOC_ALT, " + 
-                                    "END_CENTER, " + 
-                                    "START_CENTER, " + 
-                                    "END_CENTER_TIME, " + 
-                                    "START_CENTER_TIME, " + 
-                                    "LOW_Z" + ", " + 
-                                    "HIGH_Z" + ", " + 
-                                    "LOW_TIME" + ", " + 
-                                    "HIGH_TIME" + ", " + 
-                                    "BETWEEN_TIME" + ", " + 
-                                    "AVG_CLIMB" + ", " + 
-                                    "LOW_GROUND_SPEED_SMO" + ", " + 
-                                    "HIGH_GROUND_SPEED_SMO" + "\n");
                         
 			while (listSet.next()) {
 				String acNum = listSet.getString("AC_NUM");
@@ -178,46 +158,46 @@ public class SQLCommands {
                     avgClimbSpeed = Math.abs((maxGSpeed - minGSpeed)/elapseTime);
                                 
                     if(Min_Z + 3000 < Max_Z){
-                        sb.append(listSet.getString("AC_NUM")).append(", ")
-                                .append(listSet.getString("ACID")).append(", ")
-                                .append(listSet.getString("TRACK_CNT")).append(", ")
-                                .append(listSet.getString("ST_TIME")).append(", ")
-                                .append(listSet.getString("END_TIME")).append(", ")
-                                .append(listSet.getString("ORIG_ST_TIME")).append(", ")
-                                .append(listSet.getString("ORIG_END_TIME")).append(", ")
-                                .append(listSet.getString("MAX_X")).append(", ")
-                                .append(listSet.getString("MIN_X")).append(", ")
-                                .append(listSet.getString("MAX_Y")).append(", ")
-                                .append(listSet.getString("MIN_Y")).append(", ")
-                                .append(listSet.getString("MAX_Z")).append(", ")
-                                .append(listSet.getString("MIN_Z")).append(", ")
-                                .append(listSet.getString("AC_EQUIP")).append(", ")
-                                .append(listSet.getString("AC_TYPE")).append(", ")
-                                .append(listSet.getString("DEST_FIX")).append(", ")
-                                .append(listSet.getString("FLIGHT_TYPE")).append(", ")
-                                .append(listSet.getString("ORIGIN_FIX")).append(", ")
-                                .append(listSet.getString("GAP_VALUE")).append(", ")
-                                .append(listSet.getString("MAX_X_SMO")).append(", ")
-                                .append(listSet.getString("MIN_X_SMO")).append(", ")
-                                .append(listSet.getString("MAX_Y_SMO")).append(", ")
-                                .append(listSet.getString("MIN_Y_SMO")).append(", ")
-                                .append(listSet.getString("MAX_Z_SMO")).append(", ")
-                                .append(listSet.getString("MIN_Z_SMO")).append(", ")
-                                .append(listSet.getString("TOD_TIME")).append(", ")
-                                .append(listSet.getString("TOC_TIME")).append(", ")
-                                .append(listSet.getString("TOC_ALT")).append(", ")
-                                .append(listSet.getString("END_CENTER")).append(", ")
-                                .append(listSet.getString("START_CENTER")).append(", ")
-                                .append(listSet.getString("END_CENTER_TIME")).append(", ")
-                                .append(listSet.getString("START_CENTER_TIME")).append(", ")
-                                .append(Min_Z).append(", ")
-                                .append(Max_Z).append(", ")
-                                .append(minTime).append(", ")
-                                .append(maxTime).append(", ")
-                                .append(elapseTime).append(", ")
-                                .append(avgClimbSpeed).append(", ")
-                                .append(minGSpeed).append(", ")
-                                .append(maxGSpeed).append("\n");
+                    	                    	
+						 ac_Data.add(listSet.getString("AC_NUM"));
+						 ac_Data.add(listSet.getString("ACID"));
+						 ac_Data.add(listSet.getString("TRACK_CNT"));
+						 ac_Data.add(listSet.getString("ST_TIME"));
+						 ac_Data.add(listSet.getString("END_TIME"));
+						 ac_Data.add(listSet.getString("ORIG_ST_TIME"));
+						 ac_Data.add(listSet.getString("ORIG_END_TIME"));
+						 ac_Data.add(listSet.getString("MAX_X"));
+						 ac_Data.add(listSet.getString("MIN_X"));
+						 ac_Data.add(listSet.getString("MAX_Y"));
+						 ac_Data.add(listSet.getString("MIN_Y"));
+						 ac_Data.add(listSet.getString("MAX_Z"));
+						 ac_Data.add(listSet.getString("MIN_Z"));
+						 ac_Data.add(listSet.getString("AC_EQUIP"));
+						 ac_Data.add(listSet.getString("AC_TYPE"));
+						 ac_Data.add(listSet.getString("DEST_FIX"));
+						 ac_Data.add(listSet.getString("FLIGHT_TYPE"));
+						 ac_Data.add(listSet.getString("ORIGIN_FIX"));
+						 ac_Data.add(listSet.getString("GAP_VALUE"));
+						 ac_Data.add(listSet.getString("MAX_X_SMO"));
+						 ac_Data.add(listSet.getString("MIN_X_SMO"));
+						 ac_Data.add(listSet.getString("MAX_Y_SMO"));
+						 ac_Data.add(listSet.getString("MIN_Y_SMO"));
+						 ac_Data.add(listSet.getString("MAX_Z_SMO"));
+						 ac_Data.add(listSet.getString("MIN_Z_SMO"));
+						 ac_Data.add(listSet.getString("TOD_TIME"));
+						 ac_Data.add(listSet.getString("TOC_TIME"));
+						 ac_Data.add(listSet.getString("TOC_ALT"));
+						 ac_Data.add(listSet.getString("END_CENTER"));
+						 ac_Data.add(listSet.getString("START_CENTER"));
+						 ac_Data.add(listSet.getString("END_CENTER_TIME"));
+						 ac_Data.add(listSet.getString("START_CENTER_TIME"));
+                                 
+                         String[] ac_Array = ac_Data.toArray(new String[ac_Data.size()]);
+
+                         row.add(new InstanceFuseData(listSet.getString("AC_Num"), listSet.getInt("ST_TIME"),
+                     			listSet.getInt("END_TIME"), listSet.getInt("END_TIME") - listSet.getInt("ST_TIME"),
+                     			listSet.getInt("ORIG_ST_TIME"), listSet.getInt("ORIG_END_TIME"),
+                     			maxGSpeed, Min_Z, Max_Z, ac_Array));
                     }
 			}
             setReturnedString(sb.toString());

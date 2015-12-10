@@ -6,23 +6,25 @@ public class InstanceFuseData {
 	private Integer Start_Time;
 	private Integer End_Time;
 	private Integer Start_End_Time_Diff;
-	private Integer Actual_Dept_Time;
 	private Integer Orig_Start_Time;
-	private Integer Ground_Speed;
+	private Integer Orig_End_Time;
+	private Integer Cruising_Ground_Speed;
 	private Integer Start_Alt;
 	private Integer End_Alt;
 	private Integer Start_End_Alt_Diff;
 	private String[] AC_List_Info; 
 
-	public InstanceFuseData(String aC_NUM, Integer start_Time, Integer end_Time, Integer start_End_Diff, Integer actual_Dept_Time, Integer orig_Start_Time, Integer ground_Speed, Integer start_Alt, Integer end_Alt, String[] aC_List_Info) {
-		super();
+	public InstanceFuseData(String aC_NUM, Integer start_Time, 
+			Integer end_Time, Integer start_End_Diff,Integer orig_Start_Time,
+			Integer orig_End_Time, Integer cruising_ground_speed, Integer start_Alt,
+			Integer end_Alt, String[] aC_List_Info) {
 		AC_NUM = aC_NUM;
 		Start_Time = start_Time;
 		End_Time = end_Time;
 		Start_End_Time_Diff = End_Time - Start_Time;
-		Actual_Dept_Time = actual_Dept_Time;
 		Orig_Start_Time = orig_Start_Time;
-		Ground_Speed = ground_Speed;
+		Orig_End_Time = orig_End_Time;
+		Cruising_Ground_Speed = cruising_ground_speed;
 		Start_Alt = start_Alt;
 		End_Alt = end_Alt;
 		Start_End_Alt_Diff = End_Alt - Start_Alt;
@@ -61,12 +63,12 @@ public class InstanceFuseData {
 		Start_End_Time_Diff = start_End_Time_Diff;
 	}
 
-	public Integer getActual_Dept_Time() {
-		return Actual_Dept_Time;
+	public Integer getOrig_End_Time() {
+		return Orig_End_Time;
 	}
 
-	public void setActual_Dept_Time(Integer actual_Dept_Time) {
-		Actual_Dept_Time = actual_Dept_Time;
+	public void setOrig_End_Time(Integer orig_End_Time) {
+		Orig_End_Time = orig_End_Time;
 	}
 
 	public Integer getOrig_Start_Time() {
@@ -78,11 +80,11 @@ public class InstanceFuseData {
 	}
 
 	public Integer getGround_Speed() {
-		return Ground_Speed;
+		return Cruising_Ground_Speed;
 	}
 
-	public void setGround_Speed(Integer ground_Speed) {
-		Ground_Speed = ground_Speed;
+	public void setGround_Speed(Integer cruising_ground_speed) {
+		Cruising_Ground_Speed = cruising_ground_speed;
 	}
 
 	public Integer getStart_Alt() {

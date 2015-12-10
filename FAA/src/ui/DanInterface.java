@@ -178,7 +178,7 @@ public class DanInterface extends JFrame implements ActionListener {
 		XYSeries series2 = new XYSeries("Object 2");
 		XYSeries series3 = new XYSeries("Object 3");
 
-		series1.add(1.0, 2.0);
+		series1.add(2.0, 2.0);
 		series1.add(2.0, 3.0);
 		series1.add(3.0, 2.5);
 		series1.add(3.5, 2.8);
