@@ -103,7 +103,7 @@ public class SQLCommands {
 		ArrayList<String> ac_Data = new ArrayList<String>();
 		Statement stmt, stmt2 = null;
         int Max_Z, Min_Z;
-        int minTime, maxTime, elapseTime, minGSpeed, maxGSpeed, avgClimbSpeed;
+        double minTime, maxTime, elapseTime, minGSpeed, maxGSpeed, avgClimbSpeed;
         boolean minNotFound, maxNotFound;
 		StringBuilder sb = new StringBuilder();
 		// SELECT COUNT(*) FROM AC_TRKSRW15150804 WHERE Z_Value = 32000 AND AC_NUM = 50;
@@ -197,7 +197,7 @@ public class SQLCommands {
                          row.add(new InstanceFuseData(listSet.getString("AC_Num"), listSet.getInt("ST_TIME"),
                      			listSet.getInt("END_TIME"), listSet.getInt("END_TIME") - listSet.getInt("ST_TIME"),
                      			listSet.getInt("ORIG_ST_TIME"), listSet.getInt("ORIG_END_TIME"),
-                     			maxGSpeed, Min_Z, Max_Z, ac_Array));
+                     			(int) maxGSpeed, Min_Z, Max_Z, ac_Array));
                     }
 			}
             setReturnedString(sb.toString());
