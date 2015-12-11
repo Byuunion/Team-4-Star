@@ -2,10 +2,14 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -183,50 +187,42 @@ public class Model {
 		int size = flights.size();
 		for (int i = 0; i < size; i++) {
 			plane = flights.get(i).getAC_TYPE();
-			if(planes.containsKey(plane)){
-				planes.put(plane, planes.get(plane)+1);
-			}else{
+			if (planes.containsKey(plane)) {
+				planes.put(plane, planes.get(plane) + 1);
+			} else {
 				planes.put(plane, 1);
 			}
 		}
-		
+
 		sortedMap = sortHashMap(planes);
-		
+
 		for (Map.Entry entry : sortedMap.entrySet()) {
-		   System.out.println((String) entry.getKey() + " " + (int)entry.getValue());
+			System.out.println((String) entry.getKey() + " " + (int) entry.getValue());
 		}
-		
+
 		return sortedMap;
 	}
-	@SuppressWarnings("unchecked")
-	public Map<String, Integer> sortHashMap(Map<String, Integer> passedMap) {
-		   List mapKeys = new ArrayList(passedMap.keySet());
-		   List mapValues = new ArrayList(passedMap.values());
-		   Collections.sort(mapValues);
-		   Collections.sort(mapKeys);
 
-		   Map<String, Integer> sortedMap = new HashMap<>();
+	private static Map<String, Integer> sortHashMap(Map<String, Integer> unsortMap) {
 
-		   Iterator valueIt = mapValues.iterator();
-		   while (valueIt.hasNext()) {
-		       Object val = valueIt.next();
-		       Iterator keyIt = mapKeys.iterator();
+		// Convert Map to List
+		List<Map.Entry<String, Integer>> list = 
+			new LinkedList<Map.Entry<String, Integer>>(unsortMap.entrySet());
 
-		       while (keyIt.hasNext()) {
-		           Object key = keyIt.next();
-		           String comp1 = passedMap.get(key).toString();
-		           String comp2 = val.toString();
+		// Sort list with comparator, to compare the Map values
+		Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+			public int compare(Map.Entry<String, Integer> o1,
+                                           Map.Entry<String, Integer> o2) {
+				return (o1.getValue()).compareTo(o2.getValue());
+			}
+		});
 
-		           if (comp1.equals(comp2)){
-		               passedMap.remove(key);
-		               mapKeys.remove(key);
-		               sortedMap.put((String)key, (Integer)val);
-		               break;
-		           }
-
-		       }
-
-		   }
-		   return sortedMap;
+		// Convert sorted map back to a Map
+		Map<String, Integer> sortedMap = new LinkedHashMap<String, Integer>();
+		for (Iterator<Map.Entry<String, Integer>> it = list.iterator(); it.hasNext();) {
+			Map.Entry<String, Integer> entry = it.next();
+			sortedMap.put(entry.getKey(), entry.getValue());
 		}
+		return sortedMap;
+	}
 }

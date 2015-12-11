@@ -1,5 +1,6 @@
 package ui;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.jfree.chart.ChartFactory;
@@ -17,7 +18,7 @@ public class Visualizer extends ApplicationFrame
 	public Visualizer(String applicationTitle, String chartTitle, Map<String, Integer> plane)
 	{
 		super(applicationTitle);
-		JFreeChart chart = ChartFactory.createPieChart("Sample Pie Chart", pieChart(plane), true, true, false);
+		JFreeChart chart = ChartFactory.createPieChart("Plane Types", pieChart(plane), true, true, false);
 
 		ChartPanel chartPanel = new ChartPanel(chart);
 		chartPanel.setPreferredSize(new java.awt.Dimension(800, 600));
