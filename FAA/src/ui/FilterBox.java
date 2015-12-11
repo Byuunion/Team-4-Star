@@ -14,27 +14,40 @@ import javax.swing.JTextField;
 
 public class FilterBox 
 {
-	private static String returnString;
 	private static JFrame frame;
-	private static String[] returnStringArray;
-	static JTextField acidl;
-	static JTextField st_timel;
-	static JTextField end_timel;
-	static JTextField ac_eql;
-	static JTextField ac_typel;
-	static JTextField origin_fixl;
-	static JTextField start_centerl;
-	static JTextField avg_climbl;
+	private static String returnString;
+	private static String ACID;
+	
+
+
+	private static String ST_TIME;
+	private static String END_TIME;
+	private static String AC_EQ;
+	private static String AC_TYPE;
+	private static String ORIGIN_FIX;
+	private static String START_CENTER;
+	private static String AVG_CLIMB;
+	static JTextField acid;
+	static JTextField st_time;
+	static JTextField end_time;
+	static JTextField ac_eq;
+	static JTextField ac_type;
+	static JTextField origin_fix;
+	static JTextField start_center;
+	static JTextField avg_climb;
 
 
 	public FilterBox()
 	{
 		returnString = "";
-		returnStringArray = new String[8];
-		for(int i = 0; i < 8; i++) 
-		{
-			returnStringArray[i] = "";
-		}
+		String ACID = "";
+		String ST_TIME = "";
+		String END_TIME = "";
+		String AC_EQ = "";
+		String AC_TYPE = "";
+		String ORIGIN_FIX = "";
+		String START_CENTER = "";
+		String AVG_CLIMB = "";
 
 		frame = new JFrame("Test");
 
@@ -47,21 +60,21 @@ public class FilterBox
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
 		JLabel l1 = new JLabel("acid: ");
-		acidl = new JTextField("");
+		acid = new JTextField("");
 		JLabel l2 = new JLabel("st_time: ");
-		st_timel = new JTextField("");
+		st_time = new JTextField("");
 		JLabel l3 = new JLabel("end_time: ");
-		end_timel = new JTextField("");
+		end_time = new JTextField("");
 		JLabel l4 = new JLabel("ac_eq: ");
-		ac_eql = new JTextField("");
+		ac_eq = new JTextField("");
 		JLabel l5 = new JLabel("ac_type: ");
-		ac_typel = new JTextField("");
+		ac_type = new JTextField("");
 		JLabel l6 = new JLabel("origin_fix: ");
-		origin_fixl = new JTextField("");
+		origin_fix = new JTextField("");
 		JLabel l7 = new JLabel("start_center: ");
-		start_centerl = new JTextField("");
+		start_center = new JTextField("");
 		JLabel l8 = new JLabel("avg_climb: ");
-		avg_climbl = new JTextField("");
+		avg_climb = new JTextField("");
 
 		JPanel overall = new JPanel();
 		JPanel filters = new JPanel();
@@ -77,22 +90,21 @@ public class FilterBox
 		cancel.addActionListener (new Action2()); 
 
 		filters.add(l1);
-		filters.add(acidl);
+		filters.add(acid);
 		filters.add(l2);
-		filters.add(st_timel);
+		filters.add(st_time);
 		filters.add(l3);
-		filters.add(end_timel);
+		filters.add(end_time);
 		filters.add(l4);
-		filters.add(ac_eql);
+		filters.add(ac_eq);
 		filters.add(l5);
-		filters.add(ac_typel);
+		filters.add(ac_type);
 		filters.add(l6);
-		filters.add(origin_fixl);
+		filters.add(origin_fix);
 		filters.add(l7);
-		filters.add(start_centerl);
+		filters.add(start_center);
 		filters.add(l8);
-		filters.add(avg_climbl);
-		
+		filters.add(avg_climb);
 
 		buttons.add(apply);
 		buttons.add(cancel);
@@ -112,15 +124,14 @@ public class FilterBox
 			JLabel label = new JLabel("Applied Filters:");
 			JLabel listOfFilters;
 
-			returnStringArray[0] = acidl.getText();
-			returnStringArray[1] = st_timel.getText();
-			returnStringArray[2] = end_timel.getText();
-			returnStringArray[3] = ac_eql.getText();
-			returnStringArray[4] = ac_typel.getText();
-			returnStringArray[5] = origin_fixl.getText();
-			returnStringArray[6] = start_centerl.getText();
-			returnStringArray[7] = avg_climbl.getText();
-			compileString();
+			ACID = acid.getText();
+			ST_TIME = st_time.getText();
+			END_TIME = end_time.getText();
+			AC_EQ = ac_eq.getText();
+			AC_TYPE = ac_type.getText();
+			ORIGIN_FIX = origin_fix.getText();
+			START_CENTER = start_center.getText();
+			AVG_CLIMB = avg_climb.getText();
 
 			if(returnString.equals(""))
 			{
@@ -152,25 +163,88 @@ public class FilterBox
 	}
 
 
-	private static String getReturnString() 
+	public static String getReturnString() 
 	{
 		return returnString;
 	}
-
-
-	public String[] getReturnStringArray() 
-	{
-		return returnStringArray;
+	
+	public static String getACID() {
+		return ACID;
 	}
 
 
-	private static void compileString() 
-	{
-		returnString = "";
-
-		for(int i = 0; i < 8; i++) 
-		{
-			returnString += returnStringArray[i];
-		}
+	public static void setACID(String aCID) {
+		ACID = aCID;
 	}
+
+
+	public static String getST_TIME() {
+		return ST_TIME;
+	}
+
+
+	public static void setST_TIME(String sT_TIME) {
+		ST_TIME = sT_TIME;
+	}
+
+
+	public static String getEND_TIME() {
+		return END_TIME;
+	}
+
+
+	public static void setEND_TIME(String eND_TIME) {
+		END_TIME = eND_TIME;
+	}
+
+
+	public static String getAC_EQ() {
+		return AC_EQ;
+	}
+
+
+	public static void setAC_EQ(String aC_EQ) {
+		AC_EQ = aC_EQ;
+	}
+
+
+	public static String getAC_TYPE() {
+		return AC_TYPE;
+	}
+
+
+	public static void setAC_TYPE(String aC_TYPE) {
+		AC_TYPE = aC_TYPE;
+	}
+
+
+	public static String getORIGIN_FIX() {
+		return ORIGIN_FIX;
+	}
+
+
+	public static void setORIGIN_FIX(String oRIGIN_FIX) {
+		ORIGIN_FIX = oRIGIN_FIX;
+	}
+
+
+	public static String getSTART_CENTER() {
+		return START_CENTER;
+	}
+
+
+	public static void setSTART_CENTER(String sTART_CENTER) {
+		START_CENTER = sTART_CENTER;
+	}
+
+
+	public static String getAVG_CLIMB() {
+		return AVG_CLIMB;
+	}
+
+
+	public static void setAVG_CLIMB(String aVG_CLIMB) {
+		AVG_CLIMB = aVG_CLIMB;
+	}
+
 }
