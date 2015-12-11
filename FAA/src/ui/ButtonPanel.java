@@ -11,6 +11,7 @@ public class ButtonPanel extends JPanel
 	private JButton save;
 	private JButton open;
 	private JButton filter;
+	private JButton limit;
 
 
 	public ButtonPanel()
@@ -20,10 +21,12 @@ public class ButtonPanel extends JPanel
 		save = new JButton("Save");
 		open = new JButton("Open");
 		filter = new JButton("Filter");
+		limit = new JButton("Choose Display Limit");
 
 		add(save);
 		add(open);
 		add(filter);
+		add(limit);
 	}
 
 
@@ -41,6 +44,11 @@ public class ButtonPanel extends JPanel
 	public JButton getFilter()
 	{
 		return filter;
+	}
+	
+	public JButton getLimit()
+	{
+		return limit;
 	}
 	
 }
