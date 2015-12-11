@@ -53,11 +53,79 @@ public class Model
 
 
 	public String generateGalaxyString(){
-		//TODO
+		/*
+		int strtEndDiff = getStart_Time()- getEnd_Time();
+		int strtAlt = getStart_Alt() - getEnd_Alt();
+		String neatString ="\n**************************************************************************************************************************************************************\n"
+						 +   "**************************************************************************************************************************************************************\n"
+						 +   "**  AC Number :        "+getAC_NUM()                                                           												           +" **\n"
+						 +   "**************************************************************************************************************************************************************\n"
+						 +   "**************************************************************************************************************************************************************\n"
+						 +   "**  AC List Info :     "+getAC_List_Info()                                                      										                   +" **\n"
+						 +   "******************     																																	  **\n"
+						 +   "**************************************************************************************************************************************************************\n"
+						 +   "**************************************************************************************************************************************************************\n"
+						 +   "**  Start Time :       "+getStart_Time()+"        **  "+"  End_Time :            "+getEnd_Time()+       "  **  Start_End_Time_Diff:  "+strtEndDiff+"        **\n"        			 
+						 +   "**************************************************************************************************************************************************************\n"
+						 +   "**************************************************************************************************************************************************************\n"
+					     +   "**  Actual Dept.Time : "+getActual_Dept_Time()+"  **  "+"  Original_Start_Time : "+getOrig_Start_Time()+"  **  Ground_Speed:         "+getGround_Speed()+"  **\n" 
+					     +   "**************************************************************************************************************************************************************\n"
+					     +   "**************************************************************************************************************************************************************\n"
+					     +   "**  Start Alt :        "+getStart_Alt()+"         **  "+"  End_Alt :             "+getEnd_Alt()        +"  **  Ground_Speed:         "+strtAlt+          "  **\n"
+						 +   "**************************************************************************************************************************************************************\n"
+						 +   "**************************************************************************************************************************************************************\n";;
+		
+						 
+		String display = "AC_NUM\tACID\tTRACK_CNT\tST_TIME\tEND_TIME\tORIG_ST_TIME\tORIG_END_TIME";
+
+		for(int i = 0; i < 500; i++){
+			display += "\n";
+			display += (universe.get(i).getAC_NUM() + "\t");
+			display += (universe.get(i).getACID() + "\t");
+			display += (universe.get(i).getTRACK_CNT() + "\t");
+			display += (universe.get(i).getST_TIME() + "\t");
+			display += (universe.get(i).getEND_TIME() + "\t");
+			display += (universe.get(i).getORIG_ST_TIME() + "\t");
+			display += (universe.get(i).getORIG_END_TIME() + "\t");
+			display += (universe.get(i).getMAX_X() + "\t");
+			display += (universe.get(i).getMIN_X() + "\t");
+			display += (universe.get(i).getMAX_Y() + "\t");
+			display += (universe.get(i).getMIN_Y() + "\t");
+			display += (universe.get(i).getMAX_Z() + "\t");
+			display += (universe.get(i).getMIN_Z() + "\t");
+			display += (universe.get(i).getAC_EQUIP() + "\t");
+			display += (universe.get(i).getAC_TYPE() + "\t");
+			display += (universe.get(i).getDEST_FIX() + "\t");
+			display += (universe.get(i).getFLIGHT_TYPE() + "\t");
+			display += (universe.get(i).getORIGIN_FIX() + "\t");
+			display += (universe.get(i).getGAP_VALUE() + "\t");
+			display += (universe.get(i).getMAX_X_SMO() + "\t");
+			display += (universe.get(i).getMIN_X_SMO() + "\t");
+			display += (universe.get(i).getMAX_Y_SMO() + "\t");
+			display += (universe.get(i).getMIN_Y_SMO() + "\t");
+			display += (universe.get(i).getMAX_Z_SMO() + "\t");
+			display += (universe.get(i).getMIN_Z_SMO() + "\t");
+			display += (universe.get(i).getTOD_TIME() + "\t");
+			display += (universe.get(i).getTOC_TIME() + "\t");
+			display += (universe.get(i).getTOC_ALT() + "\t");
+			display += (universe.get(i).getEND_CENTER() + "\t");
+			display += (universe.get(i).getSTART_CENTER() + "\t");
+			display += (universe.get(i).getEND_CENTER_TIME() + "\t");
+			display += (universe.get(i).getSTART_CENTER_TIME() + "\t");
+			display += (universe.get(i).getLOW_Z() + "\t");
+			display += (universe.get(i).getHIGH_Z() + "\t");
+			display += (universe.get(i).getLOW_TIME() + "\t");
+			display += (universe.get(i).getHIGH_TIME() + "\t");
+			display += (universe.get(i).getBETWEEN_TIME() + "\t");
+			display += (universe.get(i).getAVG_CLIMB() + "\t");
+			display += (universe.get(i).getLOW_GROUND_SPEED_SMO() + "\t");
+			display += (universe.get(i).getHIGH_GROUND_SPEED_SMO() + "\t");
+		}
+		return display;
+		*/
 		return null;
 	}
-
-
+	
 	public void generateGalaxy(String[] filters){
 		//TODO
 	}
@@ -188,6 +256,8 @@ public class Model
 		
 		return display;
 	}
+	
+	
 	
 	public Map<String, Integer> GetPlanes() {
 		Map<String, Integer> planes = new HashMap<>();
