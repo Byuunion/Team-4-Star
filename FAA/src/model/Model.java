@@ -12,26 +12,27 @@ import java.io.IOException;
 public class Model
 {
 	private File targetFile;
-	private ArrayList<SingleFlightData> flights;
-	private ArrayList<DataSet> universe;
-	private ArrayList<DataSet> galaxy;
-
+	//private ArrayList<SingleFlightData> flights;
+	//private ArrayList<DataSet> universe;
+	//private ArrayList<DataSet> galaxy;
+	private ArrayList<SingleFlightData> universe;
+	private ArrayList<SingleFlightData> galaxy;
 
 	public Model()
 	{
-		universe = new ArrayList<DataSet>();
-		galaxy = new ArrayList<DataSet>();
-		flights = new ArrayList<SingleFlightData>();
+		universe = new ArrayList<SingleFlightData>();
+		galaxy = new ArrayList<SingleFlightData>();
+		universe = new ArrayList<SingleFlightData>();
 	}
 
 
-	public ArrayList<DataSet> getUniverse()
+	public ArrayList<SingleFlightData> getUniverse()
 	{
 		return universe;
 	}
 
 
-	public ArrayList<DataSet> getGalaxy()
+	public ArrayList<SingleFlightData> getGalaxy()
 	{
 		return galaxy;
 	}
@@ -72,15 +73,19 @@ public class Model
 
 	public void writeData(File selectedFile) throws IOException
 	{
-		BufferedWriter writer = new BufferedWriter(new FileWriter(selectedFile));
-
-		for(DataSet ifd: galaxy)
+		StringBuilder sb = new StringBuilder();
+        FileWriter writer = new FileWriter(selectedFile);
+        galaxy = universe;
+        System.out.println(galaxy.toString());
+		for(SingleFlightData ifd: galaxy)
 		{
-			String temp = ifd.toString().replace(" ", ",");
-			writer.write(temp);
+			System.out.println(ifd.toString() + "\n");
+			sb.append(ifd.toString() + "\n");
 		}
 
-		writer.close();
+		writer.write(sb.toString());
+        writer.flush();
+        writer.close();
 	}
 
 
@@ -134,16 +139,16 @@ public class Model
 			newFlight.setLOW_GROUND_SPEED_SMO(Integer.parseInt(data[38]));
 			newFlight.setHIGH_GROUND_SPEED_SMO(Integer.parseInt(data[39]));
 
-			flights.add(newFlight);
+			universe.add(newFlight);
 		}
 
 		reader.close();
 	}
 
 	
-	public ArrayList<SingleFlightData> getFlights() 
+	public ArrayList<SingleFlightData> getuniverse() 
 	{
-		return flights;
+		return universe;
 	}
 
 
@@ -154,46 +159,46 @@ public class Model
 		for(int i = 0; i < 20; i++)
 		{
 			display += "\n";
-			display += (flights.get(i).getAC_NUM() + "\t");
-			display += (flights.get(i).getACID() + "\t");
-			display += (flights.get(i).getTRACK_CNT() + "\t");
-			display += (flights.get(i).getST_TIME() + "\t");
-			display += (flights.get(i).getEND_TIME() + "\t");
-			display += (flights.get(i).getORIG_ST_TIME() + "\t");
-			display += (flights.get(i).getORIG_END_TIME() + "\t");
-			display += (flights.get(i).getMAX_X() + "\t");
-			display += (flights.get(i).getMIN_X() + "\t");
-			display += (flights.get(i).getMAX_Y() + "\t");
-			display += (flights.get(i).getMIN_Y() + "\t");
-			display += (flights.get(i).getMAX_Z() + "\t");
-			display += (flights.get(i).getMIN_Z() + "\t");
-			display += (flights.get(i).getAC_EQUIP() + "\t");
-			display += (flights.get(i).getAC_TYPE() + "\t");
-			display += (flights.get(i).getDEST_FIX() + "\t");
-			display += (flights.get(i).getFLIGHT_TYPE() + "\t");
-			display += (flights.get(i).getORIGIN_FIX() + "\t");
-			display += (flights.get(i).getGAP_VALUE() + "\t");
-			display += (flights.get(i).getMAX_X_SMO() + "\t");
-			display += (flights.get(i).getMIN_X_SMO() + "\t");
-			display += (flights.get(i).getMAX_Y_SMO() + "\t");
-			display += (flights.get(i).getMIN_Y_SMO() + "\t");
-			display += (flights.get(i).getMAX_Z_SMO() + "\t");
-			display += (flights.get(i).getMIN_Z_SMO() + "\t");
-			display += (flights.get(i).getTOD_TIME() + "\t");
-			display += (flights.get(i).getTOC_TIME() + "\t");
-			display += (flights.get(i).getTOC_ALT() + "\t");
-			display += (flights.get(i).getEND_CENTER() + "\t");
-			display += (flights.get(i).getSTART_CENTER() + "\t");
-			display += (flights.get(i).getEND_CENTER_TIME() + "\t");
-			display += (flights.get(i).getSTART_CENTER_TIME() + "\t");
-			display += (flights.get(i).getLOW_Z() + "\t");
-			display += (flights.get(i).getHIGH_Z() + "\t");
-			display += (flights.get(i).getLOW_TIME() + "\t");
-			display += (flights.get(i).getHIGH_TIME() + "\t");
-			display += (flights.get(i).getBETWEEN_TIME() + "\t");
-			display += (flights.get(i).getAVG_CLIMB() + "\t");
-			display += (flights.get(i).getLOW_GROUND_SPEED_SMO() + "\t");
-			display += (flights.get(i).getHIGH_GROUND_SPEED_SMO() + "\t");
+			display += (universe.get(i).getAC_NUM() + "\t");
+			display += (universe.get(i).getACID() + "\t");
+			display += (universe.get(i).getTRACK_CNT() + "\t");
+			display += (universe.get(i).getST_TIME() + "\t");
+			display += (universe.get(i).getEND_TIME() + "\t");
+			display += (universe.get(i).getORIG_ST_TIME() + "\t");
+			display += (universe.get(i).getORIG_END_TIME() + "\t");
+			display += (universe.get(i).getMAX_X() + "\t");
+			display += (universe.get(i).getMIN_X() + "\t");
+			display += (universe.get(i).getMAX_Y() + "\t");
+			display += (universe.get(i).getMIN_Y() + "\t");
+			display += (universe.get(i).getMAX_Z() + "\t");
+			display += (universe.get(i).getMIN_Z() + "\t");
+			display += (universe.get(i).getAC_EQUIP() + "\t");
+			display += (universe.get(i).getAC_TYPE() + "\t");
+			display += (universe.get(i).getDEST_FIX() + "\t");
+			display += (universe.get(i).getFLIGHT_TYPE() + "\t");
+			display += (universe.get(i).getORIGIN_FIX() + "\t");
+			display += (universe.get(i).getGAP_VALUE() + "\t");
+			display += (universe.get(i).getMAX_X_SMO() + "\t");
+			display += (universe.get(i).getMIN_X_SMO() + "\t");
+			display += (universe.get(i).getMAX_Y_SMO() + "\t");
+			display += (universe.get(i).getMIN_Y_SMO() + "\t");
+			display += (universe.get(i).getMAX_Z_SMO() + "\t");
+			display += (universe.get(i).getMIN_Z_SMO() + "\t");
+			display += (universe.get(i).getTOD_TIME() + "\t");
+			display += (universe.get(i).getTOC_TIME() + "\t");
+			display += (universe.get(i).getTOC_ALT() + "\t");
+			display += (universe.get(i).getEND_CENTER() + "\t");
+			display += (universe.get(i).getSTART_CENTER() + "\t");
+			display += (universe.get(i).getEND_CENTER_TIME() + "\t");
+			display += (universe.get(i).getSTART_CENTER_TIME() + "\t");
+			display += (universe.get(i).getLOW_Z() + "\t");
+			display += (universe.get(i).getHIGH_Z() + "\t");
+			display += (universe.get(i).getLOW_TIME() + "\t");
+			display += (universe.get(i).getHIGH_TIME() + "\t");
+			display += (universe.get(i).getBETWEEN_TIME() + "\t");
+			display += (universe.get(i).getAVG_CLIMB() + "\t");
+			display += (universe.get(i).getLOW_GROUND_SPEED_SMO() + "\t");
+			display += (universe.get(i).getHIGH_GROUND_SPEED_SMO() + "\t");
 		}
 		
 		return display;

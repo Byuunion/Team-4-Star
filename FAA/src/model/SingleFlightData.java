@@ -448,5 +448,47 @@ public class SingleFlightData
 	{
 		HIGH_GROUND_SPEED_SMO = hIGH_GROUND_SPEED_SMO;
 	}
-
+	
+	public String toString(){
+		return "" + AC_NUM + ", " +
+	           ACID + ", " +              
+               TRACK_CNT + ", " +            
+               ST_TIME + ", " +              
+               END_TIME + ", " +             
+               ORIG_ST_TIME + ", " +         
+               ORIG_END_TIME + ", " +        
+               MAX_X + ", " +             
+               MIN_X + ", " +             
+               MAX_Y + ", " +             
+               MIN_Y + ", " +             
+               MAX_Z + ", " +                
+               MIN_Z + ", " +                
+               AC_EQUIP + ", " +          
+               AC_TYPE + ", " +           
+               DEST_FIX + ", " +          
+               FLIGHT_TYPE + ", " +       
+               ORIGIN_FIX + ", " +        
+               GAP_VALUE + ", " +            
+               MAX_X_SMO + ", " +         
+               MIN_X_SMO + ", " +         
+               MAX_Y_SMO + ", " +         
+               MIN_Y_SMO + ", " +         
+               MAX_Z_SMO + ", " +            
+               MIN_Z_SMO + ", " +            
+               TOD_TIME + ", " +             
+               TOC_TIME + ", " +             
+               TOC_ALT + ", " +              
+               END_CENTER + ", " +        
+               START_CENTER + ", " +      
+               END_CENTER_TIME + ", " +      
+               START_CENTER_TIME + ", " +    
+               LOW_Z + ", " +                
+               HIGH_Z + ", " +               
+               LOW_TIME + ", " +             
+               HIGH_TIME + ", " +            
+               BETWEEN_TIME + ", " +         
+               AVG_CLIMB + ", " +          
+               LOW_GROUND_SPEED_SMO + ", " + 
+               HIGH_GROUND_SPEED_SMO;
+	}
 }
