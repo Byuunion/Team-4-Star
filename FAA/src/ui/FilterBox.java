@@ -246,5 +246,9 @@ public class FilterBox
 	public static void setAVG_CLIMB(String aVG_CLIMB) {
 		AVG_CLIMB = aVG_CLIMB;
 	}
+	
+	public String[] getReturnStringArray(){
+		return null;
+	}
 
 }

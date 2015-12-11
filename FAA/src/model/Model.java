@@ -3,6 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.swing.JOptionPane;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,7 +13,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
+/**
+ * TO DO FIX GENERATE GALAXY FILTER LIMIT APPENDING PROBLEM
+ * DUPLICATES
+ * @author BenzX
+ *
+ */
 public class Model
 {
 	private File targetFile;
@@ -80,51 +88,57 @@ public class Model
 		String display = "AC_NUM\tACID\tTRACK_CNT\tST_TIME\tEND_TIME\tORIG_ST_TIME\tORIG_END_TIME";
 		sb.append(display);
 
-		for(int i = 0; i < limit; i++)
-		{
-			sb.append("\n");
-			sb.append(universe.get(i).getAC_NUM() + "\t");
-			sb.append(universe.get(i).getACID() + "\t");
-			sb.append(universe.get(i).getTRACK_CNT() + "\t");
-			sb.append(universe.get(i).getST_TIME() + "\t");
-			sb.append(universe.get(i).getEND_TIME() + "\t");
-			sb.append(universe.get(i).getORIG_ST_TIME() + "\t");
-			sb.append(universe.get(i).getORIG_END_TIME() + "\t");
-			sb.append(universe.get(i).getMAX_X() + "\t");
-			sb.append(universe.get(i).getMIN_X() + "\t");
-			sb.append(universe.get(i).getMAX_Y() + "\t");
-			sb.append(universe.get(i).getMIN_Y() + "\t");
-			sb.append(universe.get(i).getMAX_Z() + "\t");
-			sb.append(universe.get(i).getMIN_Z() + "\t");
-			sb.append(universe.get(i).getAC_EQUIP() + "\t");
-			sb.append(universe.get(i).getAC_TYPE() + "\t");
-			sb.append(universe.get(i).getDEST_FIX() + "\t");
-			sb.append(universe.get(i).getFLIGHT_TYPE() + "\t");
-			sb.append(universe.get(i).getORIGIN_FIX() + "\t");
-			sb.append(universe.get(i).getGAP_VALUE() + "\t");
-			sb.append(universe.get(i).getMAX_X_SMO() + "\t");
-			sb.append(universe.get(i).getMIN_X_SMO() + "\t");
-			sb.append(universe.get(i).getMAX_Y_SMO() + "\t");
-			sb.append(universe.get(i).getMIN_Y_SMO() + "\t");
-			sb.append(universe.get(i).getMAX_Z_SMO() + "\t");
-			sb.append(universe.get(i).getMIN_Z_SMO() + "\t");
-			sb.append(universe.get(i).getTOD_TIME() + "\t");
-			sb.append(universe.get(i).getTOC_TIME() + "\t");
-			sb.append(universe.get(i).getTOC_ALT() + "\t");
-			sb.append(universe.get(i).getSTART_CENTER() + "\t");
-			sb.append(universe.get(i).getEND_CENTER_TIME() + "\t");
-			sb.append(universe.get(i).getSTART_CENTER_TIME() + "\t");
-			sb.append(universe.get(i).getLOW_Z() + "\t");
-			sb.append(universe.get(i).getHIGH_Z() + "\t");
-			sb.append(universe.get(i).getLOW_TIME() + "\t");
-			sb.append(universe.get(i).getHIGH_TIME() + "\t");
-			sb.append(universe.get(i).getBETWEEN_TIME() + "\t");
-			sb.append(universe.get(i).getAVG_CLIMB() + "\t");
-			sb.append(universe.get(i).getLOW_GROUND_SPEED_SMO() + "\t");
-			sb.append(universe.get(i).getHIGH_GROUND_SPEED_SMO() + "\t");
+		if(limit < universe.size()){
+			
+			for(int i = 0; i < limit; i++){
+				sb.append("\n");
+				sb.append(universe.get(i).getAC_NUM() + "\t");
+				sb.append(universe.get(i).getACID() + "\t");
+				sb.append(universe.get(i).getTRACK_CNT() + "\t");
+				sb.append(universe.get(i).getST_TIME() + "\t");
+				sb.append(universe.get(i).getEND_TIME() + "\t");
+				sb.append(universe.get(i).getORIG_ST_TIME() + "\t");
+				sb.append(universe.get(i).getORIG_END_TIME() + "\t");
+				sb.append(universe.get(i).getMAX_X() + "\t");
+				sb.append(universe.get(i).getMIN_X() + "\t");
+				sb.append(universe.get(i).getMAX_Y() + "\t");
+				sb.append(universe.get(i).getMIN_Y() + "\t");
+				sb.append(universe.get(i).getMAX_Z() + "\t");
+				sb.append(universe.get(i).getMIN_Z() + "\t");
+				sb.append(universe.get(i).getAC_EQUIP() + "\t");
+				sb.append(universe.get(i).getAC_TYPE() + "\t");
+				sb.append(universe.get(i).getDEST_FIX() + "\t");
+				sb.append(universe.get(i).getFLIGHT_TYPE() + "\t");
+				sb.append(universe.get(i).getORIGIN_FIX() + "\t");
+				sb.append(universe.get(i).getGAP_VALUE() + "\t");
+				sb.append(universe.get(i).getMAX_X_SMO() + "\t");
+				sb.append(universe.get(i).getMIN_X_SMO() + "\t");
+				sb.append(universe.get(i).getMAX_Y_SMO() + "\t");
+				sb.append(universe.get(i).getMIN_Y_SMO() + "\t");
+				sb.append(universe.get(i).getMAX_Z_SMO() + "\t");
+				sb.append(universe.get(i).getMIN_Z_SMO() + "\t");
+				sb.append(universe.get(i).getTOD_TIME() + "\t");
+				sb.append(universe.get(i).getTOC_TIME() + "\t");
+				sb.append(universe.get(i).getTOC_ALT() + "\t");
+				sb.append(universe.get(i).getSTART_CENTER() + "\t");
+				sb.append(universe.get(i).getEND_CENTER_TIME() + "\t");
+				sb.append(universe.get(i).getSTART_CENTER_TIME() + "\t");
+				sb.append(universe.get(i).getLOW_Z() + "\t");
+				sb.append(universe.get(i).getHIGH_Z() + "\t");
+				sb.append(universe.get(i).getLOW_TIME() + "\t");
+				sb.append(universe.get(i).getHIGH_TIME() + "\t");
+				sb.append(universe.get(i).getBETWEEN_TIME() + "\t");
+				sb.append(universe.get(i).getAVG_CLIMB() + "\t");
+				sb.append(universe.get(i).getLOW_GROUND_SPEED_SMO() + "\t");
+				sb.append(universe.get(i).getHIGH_GROUND_SPEED_SMO() + "\t");
+			}
+			return sb.toString();
+		}
+		else{
+			JOptionPane.showMessageDialog(null, "Limit larger than elements of file.");
+			return null;
 		}
 		
-		return sb.toString();
 	}
 	
 	public void generateGalaxy(){
@@ -257,7 +271,7 @@ public class Model
 		
 		return display;
 	}
-	
+	 
 	
 	
 	public Map<String, Integer> GetPlanes() {
