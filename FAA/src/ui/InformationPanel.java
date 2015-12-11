@@ -10,14 +10,12 @@ import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
 
-public class InformationPanel extends JPanel
-{
+public class InformationPanel extends JPanel{
 	private static final long serialVersionUID = 7290866987404009331L;
 	private JTextArea textArea; 
 
 
-	public InformationPanel()	
-	{
+	public InformationPanel()	{
 		TitledBorder centerBorder = BorderFactory.createTitledBorder("Flight Data");
 		centerBorder.setTitleJustification(TitledBorder.CENTER);
 		setBorder(centerBorder);
@@ -44,14 +42,12 @@ public class InformationPanel extends JPanel
 	}
 
 
-	public JTextArea getPanelTextArea()
-	{
+	public JTextArea getPanelTextArea(){
 		return textArea;
 	}
 
 
-	public void setPanelTextArea(String string)
-	{
+	public void setPanelTextArea(String string){
 		textArea.setText(string);
 	}
 

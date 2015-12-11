@@ -4,16 +4,14 @@ import java.awt.*;
 import javax.swing.*;
 
 
-public class UIScreen extends JFrame
-{	
+public class UIScreen extends JFrame{	
 	private static final long serialVersionUID = 1L;
 	private InformationPanel dataPanel;
 	private ButtonPanel buttons;
 	private JButton visualize;
 
 
-	public UIScreen() 
-	{
+	public UIScreen() {
 		super("Flight Pattern Analyzer Ver_1.0.0");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new GridBagLayout());
@@ -125,20 +123,17 @@ public class UIScreen extends JFrame
 	}
 
 
-	public JButton getVisualizer()
-	{
+	public JButton getVisualizer(){
 		return visualize;
 	}
 
 
-	public ButtonPanel getButtonPanel()
-	{
+	public ButtonPanel getButtonPanel(){
 		return buttons;
 	}
 
 
-	public InformationPanel getInfoPanel()
-	{
+	public InformationPanel getInfoPanel(){
 		return dataPanel;
 	}
 

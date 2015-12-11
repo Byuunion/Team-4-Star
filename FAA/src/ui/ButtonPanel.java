@@ -5,8 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 
-public class ButtonPanel extends JPanel
-{
+public class ButtonPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private JButton save;
 	private JButton open;
@@ -14,8 +13,7 @@ public class ButtonPanel extends JPanel
 	private JButton limit;
 
 
-	public ButtonPanel()
-	{
+	public ButtonPanel(){
 		setLayout(new GridLayout(3, 3));
 
 		save = new JButton("Save");
@@ -30,24 +28,20 @@ public class ButtonPanel extends JPanel
 	}
 
 
-	public JButton getSave()
-	{
+	public JButton getSave(){
 		return save;
 	}
 	
 
-	public JButton getOpen()
-	{
+	public JButton getOpen(){
 		return open;
 	}
 	
-	public JButton getFilter()
-	{
+	public JButton getFilter(){
 		return filter;
 	}
 	
-	public JButton getLimit()
-	{
+	public JButton getLimit(){
 		return limit;
 	}
 	

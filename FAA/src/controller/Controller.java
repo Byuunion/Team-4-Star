@@ -74,9 +74,7 @@ public class Controller {
 		};
 		ui.getButtonPanel().getFilter().addActionListener(filterAction);
 
-		ActionListener limitSelectionAction = new ActionListener()
-		{
-			
+		ActionListener limitSelectionAction = new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int messageType = JOptionPane.INFORMATION_MESSAGE;
