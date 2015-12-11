@@ -1,13 +1,18 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -16,6 +21,7 @@ import java.io.IOException;
 /**
  * TO DO FIX GENERATE GALAXY FILTER LIMIT APPENDING PROBLEM
  * DUPLICATES
+ * LINE: 182: Error NuberFomatException
  * @author BenzX
  *
  */
@@ -272,22 +278,122 @@ public class Model
 		return display;
 	}
 	 
-	
-	
 	public Map<String, Integer> GetPlanes() {
 		Map<String, Integer> planes = new HashMap<>();
+		Map<String, Integer> sortedMap = new HashMap<>();
 		String plane = null;
 		int size = universe.size();
 		for (int i = 0; i < size; i++) {
 			plane = universe.get(i).getAC_TYPE();
-			if(planes.containsKey(plane)){
-				planes.put(plane, planes.get(plane)+1);
-			}else{
+			if (planes.containsKey(plane)) {
+				planes.put(plane, planes.get(plane) + 1);
+			} else {
 				planes.put(plane, 1);
 			}
 		}
-				
-		return planes;
+
+		sortedMap = sortHashMap(planes);
+
+		return sortedMap;
+	}
+
+	public Map<String, Integer> GetDestinations() {
+		Map<String, Integer> destinations = new HashMap<>();
+		Map<String, Integer> sortedMap = new HashMap<>();
+		String plane = null;
+		int size = universe.size();
+		for (int i = 0; i < size; i++) {
+			plane = universe.get(i).getDEST_FIX();
+			if (destinations.containsKey(plane)) {
+				destinations.put(plane, destinations.get(plane) + 1);
+			} else {
+				destinations.put(plane, 1);
+			}
+		}
+
+		sortedMap = sortHashMap(destinations);
+
+		return sortedMap;
+	}
+
+	public Map<String, Integer> GetFlights() {
+		Map<String, Integer> flightTypes = new HashMap<>();
+		Map<String, Integer> sortedMap = new HashMap<>();
+		String plane = null;
+		int size = universe.size();
+		for (int i = 0; i < size; i++) {
+			plane = universe.get(i).getFLIGHT_TYPE();
+			if (flightTypes.containsKey(plane)) {
+				flightTypes.put(plane, flightTypes.get(plane) + 1);
+			} else {
+				flightTypes.put(plane, 1);
+			}
+		}
+	
+		sortedMap = sortHashMap(flightTypes);
+	
+		return sortedMap;
+	}
+
+	public Map<String, Integer> GetOrigins() {
+		Map<String, Integer> originFix = new HashMap<>();
+		Map<String, Integer> sortedMap = new HashMap<>();
+		String plane = null;
+		int size = universe.size();
+		for (int i = 0; i < size; i++) {
+			plane = universe.get(i).getORIGIN_FIX();
+			if (originFix.containsKey(plane)) {
+				originFix.put(plane, originFix.get(plane) + 1);
+			} else {
+				originFix.put(plane, 1);
+			}
+		}
+	
+		sortedMap = sortHashMap(originFix);
+	
+		return sortedMap;
+	}
+
+	public Map<String, Integer> GetStarts() {
+		Map<String, Integer> startCenter = new HashMap<>();
+		Map<String, Integer> sortedMap = new HashMap<>();
+		String plane = null;
+		int size = universe.size();
+		for (int i = 0; i < size; i++) {
+			plane = universe.get(i).getSTART_CENTER();
+			if (startCenter.containsKey(plane)) {
+				startCenter.put(plane, startCenter.get(plane) + 1);
+			} else {
+				startCenter.put(plane, 1);
+			}
+		}
+	
+		sortedMap = sortHashMap(startCenter);
+	
+		return sortedMap;
+	}
+
+	private static Map<String, Integer> sortHashMap(Map<String, Integer> unsortMap) {
+
+		// Convert Map to List
+		List<Map.Entry<String, Integer>> list = 
+			new LinkedList<Map.Entry<String, Integer>>(unsortMap.entrySet());
+
+		// Sort list with comparator, to compare the Map values
+		Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+			public int compare(Map.Entry<String, Integer> o1,
+                                           Map.Entry<String, Integer> o2) {
+				return (o2.getValue()).compareTo(o1.getValue());
+			}
+		});
+
+		// Convert sorted map back to a Map
+		Map<String, Integer> sortedMap = new LinkedHashMap<String, Integer>();
+		for (Iterator<Map.Entry<String, Integer>> it = list.iterator(); it.hasNext();) {
+			Map.Entry<String, Integer> entry = it.next();
+			sortedMap.put(entry.getKey(), entry.getValue());
+		}
+		return sortedMap;
 	}
 
 }

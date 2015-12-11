@@ -7,8 +7,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import org.jfree.ui.RefineryUtilities;
-
 import model.Model;
 import ui.FilterBox;
 import ui.UIScreen;
@@ -82,7 +80,7 @@ public class Controller {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int messageType = JOptionPane.INFORMATION_MESSAGE;
-			     Integer answer = Integer.valueOf(JOptionPane.showInputDialog(ui, "Enter A Value for The Number of Recordes to Be Displayed", "Input Dialog Box", messageType));
+			     Integer answer = Integer.valueOf(JOptionPane.showInputDialog(ui, "Enter A Value for The Number of Records to Be Displayed", "Input Dialog Box", messageType));
 			     setLimit(answer);
 			     updateDisplay();
 			}
@@ -91,10 +89,9 @@ public class Controller {
 
 		ActionListener visualizeAction = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Visualizer chart = new Visualizer("Plane Types","Different Types of Planes",model.GetPlanes());
-				chart.pack();
-				RefineryUtilities.centerFrameOnScreen(chart);
-				chart.setVisible(true);
+				Visualizer chart = new Visualizer("Plane Types",model.GetPlanes(),
+										model.GetDestinations(),model.GetFlights(),
+										model.GetOrigins(),model.GetStarts());
 			}
 		};
 		ui.getVisualizer().addActionListener(visualizeAction);
