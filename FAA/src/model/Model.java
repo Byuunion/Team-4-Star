@@ -25,8 +25,7 @@ import java.io.IOException;
  * @author BenzX
  *
  */
-public class Model
-{
+public class Model{
 	private File targetFile;
 	//private ArrayList<SingleFlightData> universe;
 	//private ArrayList<DataSet> universe;
