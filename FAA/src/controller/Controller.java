@@ -77,10 +77,12 @@ public class Controller {
 
 		ActionListener visualizeAction = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Visualizer chart = new Visualizer("Plane Types","Different Types of Planes",model.GetPlanes());
-				chart.pack();
-				RefineryUtilities.centerFrameOnScreen(chart);
-				chart.setVisible(true);
+				Visualizer chart = new Visualizer("Plane Types",model.GetPlanes(),
+										model.GetDestinations(),model.GetFlights(),
+										model.GetOrigins(),model.GetStarts());
+				//chart.pack();
+				//RefineryUtilities.centerFrameOnScreen(chart);
+				//chart.setVisible(true);
 			}
 		};
 		ui.getVisualizer().addActionListener(visualizeAction);
@@ -94,5 +96,4 @@ public class Controller {
 	public static void setUI(UIScreen screen) {
 		ui = screen;
 	}
-
 }

@@ -199,21 +199,78 @@ public class Model {
 	}
 
 	public Map<String, Integer> GetDestinations() {
-		Map<String, Integer> planes = new HashMap<>();
+		Map<String, Integer> destinations = new HashMap<>();
 		Map<String, Integer> sortedMap = new HashMap<>();
 		String plane = null;
 		int size = flights.size();
 		for (int i = 0; i < size; i++) {
 			plane = flights.get(i).getDEST_FIX();
-			if (planes.containsKey(plane)) {
-				planes.put(plane, planes.get(plane) + 1);
+			if (destinations.containsKey(plane)) {
+				destinations.put(plane, destinations.get(plane) + 1);
 			} else {
-				planes.put(plane, 1);
+				destinations.put(plane, 1);
 			}
 		}
 
-		sortedMap = sortHashMap(planes);
+		sortedMap = sortHashMap(destinations);
 
+		return sortedMap;
+	}
+
+	public Map<String, Integer> GetFlights() {
+		Map<String, Integer> flightTypes = new HashMap<>();
+		Map<String, Integer> sortedMap = new HashMap<>();
+		String plane = null;
+		int size = flights.size();
+		for (int i = 0; i < size; i++) {
+			plane = flights.get(i).getFLIGHT_TYPE();
+			if (flightTypes.containsKey(plane)) {
+				flightTypes.put(plane, flightTypes.get(plane) + 1);
+			} else {
+				flightTypes.put(plane, 1);
+			}
+		}
+	
+		sortedMap = sortHashMap(flightTypes);
+	
+		return sortedMap;
+	}
+
+	public Map<String, Integer> GetOrigins() {
+		Map<String, Integer> originFix = new HashMap<>();
+		Map<String, Integer> sortedMap = new HashMap<>();
+		String plane = null;
+		int size = flights.size();
+		for (int i = 0; i < size; i++) {
+			plane = flights.get(i).getORIGIN_FIX();
+			if (originFix.containsKey(plane)) {
+				originFix.put(plane, originFix.get(plane) + 1);
+			} else {
+				originFix.put(plane, 1);
+			}
+		}
+	
+		sortedMap = sortHashMap(originFix);
+	
+		return sortedMap;
+	}
+
+	public Map<String, Integer> GetStarts() {
+		Map<String, Integer> startCenter = new HashMap<>();
+		Map<String, Integer> sortedMap = new HashMap<>();
+		String plane = null;
+		int size = flights.size();
+		for (int i = 0; i < size; i++) {
+			plane = flights.get(i).getSTART_CENTER();
+			if (startCenter.containsKey(plane)) {
+				startCenter.put(plane, startCenter.get(plane) + 1);
+			} else {
+				startCenter.put(plane, 1);
+			}
+		}
+	
+		sortedMap = sortHashMap(startCenter);
+	
 		return sortedMap;
 	}
 
