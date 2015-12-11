@@ -126,7 +126,7 @@ public class Model
 		return null;
 	}
 	
-	public void generateGalaxy(String[] filters){
+	public void generateGalaxy(){
 		//TODO
 	}
 
