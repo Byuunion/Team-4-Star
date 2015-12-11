@@ -1,6 +1,7 @@
 package ui;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.jfree.chart.ChartFactory;
@@ -27,10 +28,15 @@ public class Visualizer extends ApplicationFrame
 	
 	public static DefaultPieDataset pieChart(Map<String, Integer> planes) {
 		DefaultPieDataset data = new DefaultPieDataset();
-		
-		for (Map.Entry entry : planes.entrySet()) {
-		    data.setValue((String) entry.getKey(),(int)entry.getValue());
-		}
+		Iterator it = planes.entrySet().iterator();
+		int count = 0;
+	    
+		while (it.hasNext() && count < 11) {
+	        Map.Entry pair = (Map.Entry)it.next();
+	        data.setValue((String)pair.getKey(), (Integer)pair.getValue());
+	        it.remove(); // avoids a ConcurrentModificationException
+	        count++;
+	    }
 
 		return data;
 	}
