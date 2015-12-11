@@ -1,17 +1,19 @@
-package controller;
+package mkOne.Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
+import mkOne.Model.Model;
+import mkOne.View.FilterBox;
+import mkOne.View.UIScreen;
+import mkOne.View.Visualizer;
+
 import org.jfree.ui.RefineryUtilities;
 
-import model.Model;
-import ui.FilterBox;
-import ui.UIScreen;
-import ui.Visualizer;
 
 public class Controller {
 	public static void main(String[] args) {

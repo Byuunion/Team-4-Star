@@ -1,4 +1,4 @@
-package model;
+package mkOne.Model;
 
 public class InstanceFuseData {
 	

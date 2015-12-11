@@ -1,4 +1,4 @@
-package ui;
+package mkOne.View;
 
 import java.awt.GridLayout;
 import javax.swing.JButton;

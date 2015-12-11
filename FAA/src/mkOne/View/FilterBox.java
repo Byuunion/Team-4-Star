@@ -1,4 +1,4 @@
-package ui;
+package mkOne.View;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;

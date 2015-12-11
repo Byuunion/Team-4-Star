@@ -1,6 +1,7 @@
-package ui;
+package mkOne.View;
 
 import java.awt.*;
+
 import javax.swing.*;
 
 
