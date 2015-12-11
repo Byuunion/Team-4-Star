@@ -17,19 +17,21 @@ public class FilterBox
 	private static String returnString;
 	private static JFrame frame;
 	private static String[] returnStringArray;
-	static JTextField tf1;
-	static JTextField tf2;
-	static JTextField tf3;
-	static JTextField tf4;
-	static JTextField tf5;
-	static JTextField tf6;
+	static JTextField acidl;
+	static JTextField st_timel;
+	static JTextField end_timel;
+	static JTextField ac_eql;
+	static JTextField ac_typel;
+	static JTextField origin_fixl;
+	static JTextField start_centerl;
+	static JTextField avg_climbl;
 
 
 	public FilterBox()
 	{
 		returnString = "";
-		returnStringArray = new String[6];
-		for(int i = 0; i < 6; i++) 
+		returnStringArray = new String[8];
+		for(int i = 0; i < 8; i++) 
 		{
 			returnStringArray[i] = "";
 		}
@@ -44,24 +46,28 @@ public class FilterBox
 		frame.setLocation(screenWidth / 4, screenHeight / 4);
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-		JLabel l1 = new JLabel("ACID: ");
-		tf1 = new JTextField("");
-		JLabel l2 = new JLabel("AC_NUM: ");
-		tf2 = new JTextField("");
-		JLabel l3 = new JLabel("Field A: ");
-		tf3 = new JTextField("");
-		JLabel l4 = new JLabel("Field B: ");
-		tf4 = new JTextField("");
-		JLabel l5 = new JLabel("Field C: ");
-		tf5 = new JTextField("");
-		JLabel l6 = new JLabel("Field D: ");
-		tf6 = new JTextField("");
+		JLabel l1 = new JLabel("acid: ");
+		acidl = new JTextField("");
+		JLabel l2 = new JLabel("st_time: ");
+		st_timel = new JTextField("");
+		JLabel l3 = new JLabel("end_time: ");
+		end_timel = new JTextField("");
+		JLabel l4 = new JLabel("ac_eq: ");
+		ac_eql = new JTextField("");
+		JLabel l5 = new JLabel("ac_type: ");
+		ac_typel = new JTextField("");
+		JLabel l6 = new JLabel("origin_fix: ");
+		origin_fixl = new JTextField("");
+		JLabel l7 = new JLabel("start_center: ");
+		start_centerl = new JTextField("");
+		JLabel l8 = new JLabel("avg_climb: ");
+		avg_climbl = new JTextField("");
 
 		JPanel overall = new JPanel();
 		JPanel filters = new JPanel();
 		JPanel buttons = new JPanel();
 		overall.setLayout(new GridLayout(2,1));
-		filters.setLayout(new GridLayout(6,2));
+		filters.setLayout(new GridLayout(8,2));
 		buttons.setLayout(new GridLayout(1,2));
 
 		JButton apply = new JButton("Apply");
@@ -71,17 +77,22 @@ public class FilterBox
 		cancel.addActionListener (new Action2()); 
 
 		filters.add(l1);
-		filters.add(tf1);
+		filters.add(acidl);
 		filters.add(l2);
-		filters.add(tf2);
+		filters.add(st_timel);
 		filters.add(l3);
-		filters.add(tf3);
+		filters.add(end_timel);
 		filters.add(l4);
-		filters.add(tf4);
+		filters.add(ac_eql);
 		filters.add(l5);
-		filters.add(tf5);
+		filters.add(ac_typel);
 		filters.add(l6);
-		filters.add(tf6);
+		filters.add(origin_fixl);
+		filters.add(l7);
+		filters.add(start_centerl);
+		filters.add(l8);
+		filters.add(avg_climbl);
+		
 
 		buttons.add(apply);
 		buttons.add(cancel);
@@ -101,12 +112,14 @@ public class FilterBox
 			JLabel label = new JLabel("Applied Filters:");
 			JLabel listOfFilters;
 
-			returnStringArray[0] = tf1.getText();
-			returnStringArray[1] = tf2.getText();
-			returnStringArray[2] = tf3.getText();
-			returnStringArray[3] = tf4.getText();
-			returnStringArray[4] = tf5.getText();
-			returnStringArray[5] = tf6.getText();
+			returnStringArray[0] = acidl.getText();
+			returnStringArray[1] = st_timel.getText();
+			returnStringArray[2] = end_timel.getText();
+			returnStringArray[3] = ac_eql.getText();
+			returnStringArray[4] = ac_typel.getText();
+			returnStringArray[5] = origin_fixl.getText();
+			returnStringArray[6] = start_centerl.getText();
+			returnStringArray[7] = avg_climbl.getText();
 			compileString();
 
 			if(returnString.equals(""))
@@ -155,7 +168,7 @@ public class FilterBox
 	{
 		returnString = "";
 
-		for(int i = 0; i < 6; i++) 
+		for(int i = 0; i < 8; i++) 
 		{
 			returnString += returnStringArray[i];
 		}
