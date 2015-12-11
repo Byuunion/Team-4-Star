@@ -1,6 +1,11 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -8,94 +13,64 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
-public class Model
-{
+public class Model {
 	private File targetFile;
-	//private ArrayList<SingleFlightData> flights;
-	//private ArrayList<DataSet> universe;
-	//private ArrayList<DataSet> galaxy;
-	private ArrayList<SingleFlightData> universe;
-	private ArrayList<SingleFlightData> galaxy;
+	private ArrayList<SingleFlightData> flights;
+	private ArrayList<DataSet> universe;
+	private ArrayList<DataSet> galaxy;
 
-	public Model()
-	{
-		universe = new ArrayList<SingleFlightData>();
-		galaxy = new ArrayList<SingleFlightData>();
-		universe = new ArrayList<SingleFlightData>();
+	public Model() {
+		universe = new ArrayList<DataSet>();
+		galaxy = new ArrayList<DataSet>();
+		flights = new ArrayList<SingleFlightData>();
 	}
 
-
-	public ArrayList<SingleFlightData> getUniverse()
-	{
+	public ArrayList<DataSet> getUniverse() {
 		return universe;
 	}
 
-
-	public ArrayList<SingleFlightData> getGalaxy()
-	{
+	public ArrayList<DataSet> getGalaxy() {
 		return galaxy;
 	}
 
-
-	public void setFile(File newFile)
-	{	
+	public void setFile(File newFile) {
 		targetFile = newFile;
-		try 
-		{
+		try {
 			generateUniverse();
-		}
-		catch (IOException e) 
-		{
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-
-	public File getFile()
-	{
+	public File getFile() {
 		return targetFile;
 	}
 
-
-	public String generateGalaxyString()
-	{
-		//TODO
+	public String generateGalaxyString() {
+		// TODO
 		return null;
 	}
 
-
-	public void generateGalaxy(String[] filters)
-	{
-		//TODO
+	public void generateGalaxy(String[] filters) {
+		// TODO
 	}
 
+	public void writeData(File selectedFile) throws IOException {
+		BufferedWriter writer = new BufferedWriter(new FileWriter(selectedFile));
 
-	public void writeData(File selectedFile) throws IOException
-	{
-		StringBuilder sb = new StringBuilder();
-        FileWriter writer = new FileWriter(selectedFile);
-        galaxy = universe;
-        System.out.println(galaxy.toString());
-		for(SingleFlightData ifd: galaxy)
-		{
-			System.out.println(ifd.toString() + "\n");
-			sb.append(ifd.toString() + "\n");
+		for (DataSet ifd : galaxy) {
+			String temp = ifd.toString().replace(" ", ",");
+			writer.write(temp);
 		}
 
-		writer.write(sb.toString());
-        writer.flush();
-        writer.close();
+		writer.close();
 	}
 
-
-	public void generateUniverse() throws IOException
-	{
+	public void generateUniverse() throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader(targetFile));
 		String temp = reader.readLine();
 
-		while((temp = reader.readLine()) != null)
-		{	
+		while ((temp = reader.readLine()) != null) {
 			SingleFlightData newFlight = new SingleFlightData();
 			String[] data = temp.split(",");
 			newFlight.setAC_NUM(Integer.parseInt(data[0]));
@@ -139,69 +114,119 @@ public class Model
 			newFlight.setLOW_GROUND_SPEED_SMO(Integer.parseInt(data[38]));
 			newFlight.setHIGH_GROUND_SPEED_SMO(Integer.parseInt(data[39]));
 
-			universe.add(newFlight);
+			flights.add(newFlight);
 		}
 
 		reader.close();
 	}
 
-	
-	public ArrayList<SingleFlightData> getuniverse() 
-	{
-		return universe;
+	public ArrayList<SingleFlightData> getFlights() {
+		return flights;
 	}
 
-
-	public String generateUniverseString() 
-	{
+	public String generateUniverseString() {
 		String display = "AC_NUM\tACID\tTRACK_CNT\tST_TIME\tEND_TIME\tORIG_ST_TIME\tORIG_END_TIME";
 
-		for(int i = 0; i < 20; i++)
-		{
+		for (int i = 0; i < 500; i++) {
 			display += "\n";
-			display += (universe.get(i).getAC_NUM() + "\t");
-			display += (universe.get(i).getACID() + "\t");
-			display += (universe.get(i).getTRACK_CNT() + "\t");
-			display += (universe.get(i).getST_TIME() + "\t");
-			display += (universe.get(i).getEND_TIME() + "\t");
-			display += (universe.get(i).getORIG_ST_TIME() + "\t");
-			display += (universe.get(i).getORIG_END_TIME() + "\t");
-			display += (universe.get(i).getMAX_X() + "\t");
-			display += (universe.get(i).getMIN_X() + "\t");
-			display += (universe.get(i).getMAX_Y() + "\t");
-			display += (universe.get(i).getMIN_Y() + "\t");
-			display += (universe.get(i).getMAX_Z() + "\t");
-			display += (universe.get(i).getMIN_Z() + "\t");
-			display += (universe.get(i).getAC_EQUIP() + "\t");
-			display += (universe.get(i).getAC_TYPE() + "\t");
-			display += (universe.get(i).getDEST_FIX() + "\t");
-			display += (universe.get(i).getFLIGHT_TYPE() + "\t");
-			display += (universe.get(i).getORIGIN_FIX() + "\t");
-			display += (universe.get(i).getGAP_VALUE() + "\t");
-			display += (universe.get(i).getMAX_X_SMO() + "\t");
-			display += (universe.get(i).getMIN_X_SMO() + "\t");
-			display += (universe.get(i).getMAX_Y_SMO() + "\t");
-			display += (universe.get(i).getMIN_Y_SMO() + "\t");
-			display += (universe.get(i).getMAX_Z_SMO() + "\t");
-			display += (universe.get(i).getMIN_Z_SMO() + "\t");
-			display += (universe.get(i).getTOD_TIME() + "\t");
-			display += (universe.get(i).getTOC_TIME() + "\t");
-			display += (universe.get(i).getTOC_ALT() + "\t");
-			display += (universe.get(i).getEND_CENTER() + "\t");
-			display += (universe.get(i).getSTART_CENTER() + "\t");
-			display += (universe.get(i).getEND_CENTER_TIME() + "\t");
-			display += (universe.get(i).getSTART_CENTER_TIME() + "\t");
-			display += (universe.get(i).getLOW_Z() + "\t");
-			display += (universe.get(i).getHIGH_Z() + "\t");
-			display += (universe.get(i).getLOW_TIME() + "\t");
-			display += (universe.get(i).getHIGH_TIME() + "\t");
-			display += (universe.get(i).getBETWEEN_TIME() + "\t");
-			display += (universe.get(i).getAVG_CLIMB() + "\t");
-			display += (universe.get(i).getLOW_GROUND_SPEED_SMO() + "\t");
-			display += (universe.get(i).getHIGH_GROUND_SPEED_SMO() + "\t");
+			display += (flights.get(i).getAC_NUM() + "\t");
+			display += (flights.get(i).getACID() + "\t");
+			display += (flights.get(i).getTRACK_CNT() + "\t");
+			display += (flights.get(i).getST_TIME() + "\t");
+			display += (flights.get(i).getEND_TIME() + "\t");
+			display += (flights.get(i).getORIG_ST_TIME() + "\t");
+			display += (flights.get(i).getORIG_END_TIME() + "\t");
+			display += (flights.get(i).getMAX_X() + "\t");
+			display += (flights.get(i).getMIN_X() + "\t");
+			display += (flights.get(i).getMAX_Y() + "\t");
+			display += (flights.get(i).getMIN_Y() + "\t");
+			display += (flights.get(i).getMAX_Z() + "\t");
+			display += (flights.get(i).getMIN_Z() + "\t");
+			display += (flights.get(i).getAC_EQUIP() + "\t");
+			display += (flights.get(i).getAC_TYPE() + "\t");
+			display += (flights.get(i).getDEST_FIX() + "\t");
+			display += (flights.get(i).getFLIGHT_TYPE() + "\t");
+			display += (flights.get(i).getORIGIN_FIX() + "\t");
+			display += (flights.get(i).getGAP_VALUE() + "\t");
+			display += (flights.get(i).getMAX_X_SMO() + "\t");
+			display += (flights.get(i).getMIN_X_SMO() + "\t");
+			display += (flights.get(i).getMAX_Y_SMO() + "\t");
+			display += (flights.get(i).getMIN_Y_SMO() + "\t");
+			display += (flights.get(i).getMAX_Z_SMO() + "\t");
+			display += (flights.get(i).getMIN_Z_SMO() + "\t");
+			display += (flights.get(i).getTOD_TIME() + "\t");
+			display += (flights.get(i).getTOC_TIME() + "\t");
+			display += (flights.get(i).getTOC_ALT() + "\t");
+			display += (flights.get(i).getEND_CENTER() + "\t");
+			display += (flights.get(i).getSTART_CENTER() + "\t");
+			display += (flights.get(i).getEND_CENTER_TIME() + "\t");
+			display += (flights.get(i).getSTART_CENTER_TIME() + "\t");
+			display += (flights.get(i).getLOW_Z() + "\t");
+			display += (flights.get(i).getHIGH_Z() + "\t");
+			display += (flights.get(i).getLOW_TIME() + "\t");
+			display += (flights.get(i).getHIGH_TIME() + "\t");
+			display += (flights.get(i).getBETWEEN_TIME() + "\t");
+			display += (flights.get(i).getAVG_CLIMB() + "\t");
+			display += (flights.get(i).getLOW_GROUND_SPEED_SMO() + "\t");
+			display += (flights.get(i).getHIGH_GROUND_SPEED_SMO() + "\t");
 		}
-		
+
+		display += "\n \n Number of Flights: " + flights.size();
+
 		return display;
 	}
 
+	public Map<String, Integer> GetPlanes() {
+		Map<String, Integer> planes = new HashMap<>();
+		Map<String, Integer> sortedMap = new HashMap<>();
+		String plane = null;
+		int size = flights.size();
+		for (int i = 0; i < size; i++) {
+			plane = flights.get(i).getAC_TYPE();
+			if(planes.containsKey(plane)){
+				planes.put(plane, planes.get(plane)+1);
+			}else{
+				planes.put(plane, 1);
+			}
+		}
+		
+		sortedMap = sortHashMap(planes);
+		
+		for (Map.Entry entry : sortedMap.entrySet()) {
+		   System.out.println((String) entry.getKey() + " " + (int)entry.getValue());
+		}
+		
+		return sortedMap;
+	}
+	@SuppressWarnings("unchecked")
+	public Map<String, Integer> sortHashMap(Map<String, Integer> passedMap) {
+		   List mapKeys = new ArrayList(passedMap.keySet());
+		   List mapValues = new ArrayList(passedMap.values());
+		   Collections.sort(mapValues);
+		   Collections.sort(mapKeys);
+
+		   Map<String, Integer> sortedMap = new HashMap<>();
+
+		   Iterator valueIt = mapValues.iterator();
+		   while (valueIt.hasNext()) {
+		       Object val = valueIt.next();
+		       Iterator keyIt = mapKeys.iterator();
+
+		       while (keyIt.hasNext()) {
+		           Object key = keyIt.next();
+		           String comp1 = passedMap.get(key).toString();
+		           String comp2 = val.toString();
+
+		           if (comp1.equals(comp2)){
+		               passedMap.remove(key);
+		               mapKeys.remove(key);
+		               sortedMap.put((String)key, (Integer)val);
+		               break;
+		           }
+
+		       }
+
+		   }
+		   return sortedMap;
+		}
 }
