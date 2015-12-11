@@ -93,7 +93,7 @@ public class Controller
 			public void actionPerformed(ActionEvent event)
 			{
 				FilterBox box = new FilterBox();
-				model.generateGalaxy(box.getReturnStringArray());
+				model.generateGalaxy();
 				ui.getInfoPanel().setPanelTextArea(model.generateGalaxyString());
 			}
 		};
