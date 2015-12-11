@@ -195,9 +195,24 @@ public class Model {
 
 		sortedMap = sortHashMap(planes);
 
-		for (Map.Entry entry : sortedMap.entrySet()) {
-			System.out.println((String) entry.getKey() + " " + (int) entry.getValue());
+		return sortedMap;
+	}
+
+	public Map<String, Integer> GetDestinations() {
+		Map<String, Integer> planes = new HashMap<>();
+		Map<String, Integer> sortedMap = new HashMap<>();
+		String plane = null;
+		int size = flights.size();
+		for (int i = 0; i < size; i++) {
+			plane = flights.get(i).getDEST_FIX();
+			if (planes.containsKey(plane)) {
+				planes.put(plane, planes.get(plane) + 1);
+			} else {
+				planes.put(plane, 1);
+			}
 		}
+
+		sortedMap = sortHashMap(planes);
 
 		return sortedMap;
 	}
