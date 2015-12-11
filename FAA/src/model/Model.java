@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -18,61 +20,50 @@ public class Model
 	private ArrayList<SingleFlightData> universe;
 	private ArrayList<SingleFlightData> galaxy;
 
-	public Model()
-	{
+	public Model(){
 		universe = new ArrayList<SingleFlightData>();
 		galaxy = new ArrayList<SingleFlightData>();
 		universe = new ArrayList<SingleFlightData>();
 	}
 
 
-	public ArrayList<SingleFlightData> getUniverse()
-	{
+	public ArrayList<SingleFlightData> getUniverse(){
 		return universe;
 	}
 
 
-	public ArrayList<SingleFlightData> getGalaxy()
-	{
+	public ArrayList<SingleFlightData> getGalaxy(){
 		return galaxy;
 	}
 
 
-	public void setFile(File newFile)
-	{	
+	public void setFile(File newFile){	
 		targetFile = newFile;
-		try 
-		{
+		try {
 			generateUniverse();
 		}
-		catch (IOException e) 
-		{
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-
-	public File getFile()
-	{
+	public File getFile(){
 		return targetFile;
 	}
 
 
-	public String generateGalaxyString()
-	{
+	public String generateGalaxyString(){
 		//TODO
 		return null;
 	}
 
 
-	public void generateGalaxy(String[] filters)
-	{
+	public void generateGalaxy(String[] filters){
 		//TODO
 	}
 
 
-	public void writeData(File selectedFile) throws IOException
-	{
+	public void writeData(File selectedFile) throws IOException{
 		StringBuilder sb = new StringBuilder();
         FileWriter writer = new FileWriter(selectedFile);
         galaxy = universe;
@@ -89,13 +80,11 @@ public class Model
 	}
 
 
-	public void generateUniverse() throws IOException
-	{
+	public void generateUniverse() throws IOException{
 		BufferedReader reader = new BufferedReader(new FileReader(targetFile));
 		String temp = reader.readLine();
 
-		while((temp = reader.readLine()) != null)
-		{	
+		while((temp = reader.readLine()) != null){	
 			SingleFlightData newFlight = new SingleFlightData();
 			String[] data = temp.split(",");
 			newFlight.setAC_NUM(Integer.parseInt(data[0]));
@@ -141,23 +130,19 @@ public class Model
 
 			universe.add(newFlight);
 		}
-
 		reader.close();
 	}
 
 	
-	public ArrayList<SingleFlightData> getuniverse() 
-	{
+	public ArrayList<SingleFlightData> getuniverse() {
 		return universe;
 	}
 
 
-	public String generateUniverseString() 
-	{
+	public String generateUniverseString(){
 		String display = "AC_NUM\tACID\tTRACK_CNT\tST_TIME\tEND_TIME\tORIG_ST_TIME\tORIG_END_TIME";
 
-		for(int i = 0; i < 20; i++)
-		{
+		for(int i = 0; i < 500; i++){
 			display += "\n";
 			display += (universe.get(i).getAC_NUM() + "\t");
 			display += (universe.get(i).getACID() + "\t");
@@ -202,6 +187,22 @@ public class Model
 		}
 		
 		return display;
+	}
+	
+	public Map<String, Integer> GetPlanes() {
+		Map<String, Integer> planes = new HashMap<>();
+		String plane = null;
+		int size = universe.size();
+		for (int i = 0; i < size; i++) {
+			plane = universe.get(i).getAC_TYPE();
+			if(planes.containsKey(plane)){
+				planes.put(plane, planes.get(plane)+1);
+			}else{
+				planes.put(plane, 1);
+			}
+		}
+				
+		return planes;
 	}
 
 }
