@@ -12,8 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
-public class FilterBox 
-{
+public class FilterBox {
 	private static JFrame frame;
 	private static String returnString;
 	private static String ACID;
@@ -37,8 +36,7 @@ public class FilterBox
 	static JTextField avg_climb;
 
 
-	public FilterBox()
-	{
+	public FilterBox(){
 		returnString = "";
 		String ACID = "";
 		String ST_TIME = "";
@@ -116,10 +114,8 @@ public class FilterBox
 		frame.setVisible(true);
 	}
 
-	static class Action1 implements ActionListener 
-	{    
-		public void actionPerformed (ActionEvent e) 
-		{     
+	static class Action1 implements ActionListener { 
+		public void actionPerformed (ActionEvent e) {     
 			JFrame frame2 = new JFrame("Clicked");
 			JLabel label = new JLabel("Applied Filters:");
 			JLabel listOfFilters;
@@ -133,12 +129,10 @@ public class FilterBox
 			START_CENTER = start_center.getText();
 			AVG_CLIMB = avg_climb.getText();
 
-			if(returnString.equals(""))
-			{
+			if(returnString.equals("")){
 				listOfFilters = new JLabel("No Filters have been Applied");
 			}
-			else
-			{	
+			else{	
 				listOfFilters = new JLabel(getReturnString());
 			}
 
@@ -154,17 +148,14 @@ public class FilterBox
 	}   
 
 
-	private class Action2 implements ActionListener 
-	{        
-		public void actionPerformed (ActionEvent e)
-		{     
+	private class Action2 implements ActionListener {        
+		public void actionPerformed (ActionEvent e){     
 			frame.dispose();
 		}
 	}
 
 
-	public static String getReturnString() 
-	{
+	public static String getReturnString() {
 		return returnString;
 	}
 	
