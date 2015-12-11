@@ -64,7 +64,7 @@ public class Model
 	}
 
 
-	public void generateGalaxy(String[] filters)
+	public void generateGalaxy()
 	{
 		//TODO
 	}
