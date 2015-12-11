@@ -18,8 +18,7 @@ import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities; 
 
 
-public class Visualizer extends ApplicationFrame
-{
+public class Visualizer extends ApplicationFrame{
 	private static final long serialVersionUID = 1L;
 
 
@@ -27,6 +26,7 @@ public class Visualizer extends ApplicationFrame
 					  Map<String, Integer> dest, Map<String, Integer> flig,
 					  Map<String, Integer> orig, Map<String, Integer> star)
 	{
+
 		super(applicationTitle);
 		JFrame chartFrame = new JFrame();
 		JTabbedPane tabsPane = new JTabbedPane();

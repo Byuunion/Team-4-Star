@@ -37,8 +37,7 @@ public class FilterBox
 	static JTextField avg_climb;
 
 
-	public FilterBox()
-	{
+	public FilterBox(){
 		returnString = "";
 		String ACID = "";
 		String ST_TIME = "";
@@ -48,7 +47,7 @@ public class FilterBox
 		String ORIGIN_FIX = "";
 		String START_CENTER = "";
 		String AVG_CLIMB = "";
-
+		
 		frame = new JFrame("Test");
 
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -116,10 +115,8 @@ public class FilterBox
 		frame.setVisible(true);
 	}
 
-	static class Action1 implements ActionListener 
-	{    
-		public void actionPerformed (ActionEvent e) 
-		{     
+	static class Action1 implements ActionListener {    
+		public void actionPerformed (ActionEvent e) {     
 			JFrame frame2 = new JFrame("Clicked");
 			JLabel label = new JLabel("Applied Filters:");
 			JLabel listOfFilters;
@@ -133,12 +130,10 @@ public class FilterBox
 			START_CENTER = start_center.getText();
 			AVG_CLIMB = avg_climb.getText();
 
-			if(returnString.equals(""))
-			{
+			if(returnString.equals("")){
 				listOfFilters = new JLabel("No Filters have been Applied");
 			}
-			else
-			{	
+			else{	
 				listOfFilters = new JLabel(getReturnString());
 			}
 
@@ -154,14 +149,11 @@ public class FilterBox
 	}   
 
 
-	private class Action2 implements ActionListener 
-	{        
-		public void actionPerformed (ActionEvent e)
-		{     
+	private class Action2 implements ActionListener {        
+		public void actionPerformed (ActionEvent e){     
 			frame.dispose();
 		}
 	}
-
 
 	public static String getReturnString() 
 	{
@@ -172,11 +164,10 @@ public class FilterBox
 		return ACID;
 	}
 
-
 	public static void setACID(String aCID) {
 		ACID = aCID;
-	}
 
+	}
 
 	public static String getST_TIME() {
 		return ST_TIME;
