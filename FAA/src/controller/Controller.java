@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import org.jfree.ui.RefineryUtilities;
 
@@ -23,6 +24,7 @@ public class Controller {
 
 	private static UIScreen ui;
 	private static Model model;
+	private Integer limit;
 
 	public Controller() {
 		ui = new UIScreen();
@@ -68,11 +70,24 @@ public class Controller {
 		ActionListener filterAction = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				FilterBox box = new FilterBox();
-				model.generateGalaxy();
-				ui.getInfoPanel().setPanelTextArea(model.generateGalaxyString());
+				model.generateGalaxy(box.getReturnStringArray());
+				ui.getInfoPanel().setPanelTextArea(model.generateGalaxyString(limit));
 			}
 		};
 		ui.getButtonPanel().getFilter().addActionListener(filterAction);
+
+		ActionListener limitSelectionAction = new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int messageType = JOptionPane.INFORMATION_MESSAGE;
+			     Integer answer = Integer.valueOf(JOptionPane.showInputDialog(ui, "Enter A Value for The Number of Recordes to Be Displayed", "Input Dialog Box", messageType));
+			     setLimit(answer);
+			     updateDisplay();
+			}
+		};
+		ui.getButtonPanel().getLimit().addActionListener(limitSelectionAction);
 
 		ActionListener visualizeAction = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -92,6 +107,18 @@ public class Controller {
 
 	public static void setUI(UIScreen screen) {
 		ui = screen;
+	}
+	
+	public Integer getLimit() {
+		return limit;
+	}
+	
+	public void setLimit(int val) {
+		limit = val;
+	}
+	
+	public void updateDisplay() {
+		ui.getInfoPanel().setPanelTextArea(model.generateGalaxyString(limit));
 	}
 
 }
