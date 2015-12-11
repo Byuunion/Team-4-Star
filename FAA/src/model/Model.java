@@ -148,10 +148,48 @@ public class Model
 	}
 	
 	public void generateGalaxy(){
-		//TODO
+		galaxy = new ArrayList<SingleFlightData>(universe);
 	}
 
-
+	public void filterGalaxy(String ACID, String ST_TIME, String END_TIME, String AC_EQ, String AC_TYPE, String ORIGIN_FIX, String START_CENTER, String AVG_CLIMB) {
+		for(int i = 0; i < galaxy.size(); i++) {
+			if(!galaxy.get(i).getACID().contains(ACID)) {
+				galaxy.remove(galaxy.get(i));
+				i--;
+			}
+			if(!galaxy.get(i).getST_TIMEString().contains(ST_TIME)) {
+				galaxy.remove(galaxy.get(i));
+				i--;
+			}
+			if(!galaxy.get(i).getORIG_END_TIMEString().contains(END_TIME)) {
+				galaxy.remove(galaxy.get(i));
+				i--;
+			}
+			if(!galaxy.get(i).getAC_EQUIP().contains(AC_EQ)) {
+				galaxy.remove(galaxy.get(i));
+				i--;
+			}
+			if(!galaxy.get(i).getAC_TYPE().contains(AC_TYPE)) {
+				galaxy.remove(galaxy.get(i));
+				i--;
+			}
+			if(!galaxy.get(i).getORIGIN_FIX().contains(ORIGIN_FIX)) {
+				galaxy.remove(galaxy.get(i));
+				i--;
+			}
+			if(!galaxy.get(i).getSTART_CENTER().contains(START_CENTER)) {
+				galaxy.remove(galaxy.get(i));
+				i--;
+			}
+			if(!galaxy.get(i).getAVG_CLIMBString().contains(AVG_CLIMB)) {
+				galaxy.remove(galaxy.get(i));
+				i--;
+			}
+			//String ACID, String ST_TIME, String END_TIME, String AC_EQ, 
+			//String AC_TYPE, String ORIGIN_FIX, String START_CENTER, String AVG_CLIMB
+		}
+	}
+	
 	public void writeData(File selectedFile) throws IOException{
 		StringBuilder sb = new StringBuilder();
         FileWriter writer = new FileWriter(selectedFile);
