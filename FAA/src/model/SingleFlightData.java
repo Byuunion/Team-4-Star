@@ -40,7 +40,7 @@ public class SingleFlightData
 	private int LOW_TIME;
 	private int HIGH_TIME;
 	private int BETWEEN_TIME;
-	private float AVG_CLIMB;
+	private double AVG_CLIMB;
 	private int LOW_GROUND_SPEED_SMO;
 	private int HIGH_GROUND_SPEED_SMO;
 
@@ -419,7 +419,7 @@ public class SingleFlightData
 		BETWEEN_TIME = bETWEEN_TIME;
 	}
 
-	public float getAVG_CLIMB()
+	public double getAVG_CLIMB()
 	{
 		return AVG_CLIMB;
 	}
@@ -490,5 +490,163 @@ public class SingleFlightData
                AVG_CLIMB + ", " +          
                LOW_GROUND_SPEED_SMO + ", " + 
                HIGH_GROUND_SPEED_SMO;
+	}
+
+	
+	public String getAC_NUMString()
+	{
+		return Integer.toString(AC_NUM);
+	}
+	
+	public String getTRACK_CNTString() 
+	{
+		return Integer.toString(TRACK_CNT);
+	}
+	
+	public String getST_TIMEString() 
+	{
+		return Integer.toString(ST_TIME);
+	}
+	
+	public String getEND_TIMESZtring() 
+	{
+		return Integer.toString(END_TIME);
+	}
+	
+	public String getORIG_ST_TIMEString()
+	{
+		return Integer.toString(ORIG_ST_TIME);
+	}
+	
+	public String getORIG_END_TIMEString()
+	{
+		return Integer.toString(ORIG_END_TIME);
+	}
+	
+	public String getMAX_XString()
+	{
+		return Double.toString(MAX_X);
+	}
+	
+	public String getMIN_XString()
+	{
+		return Double.toString(MIN_X);
+	}
+	
+	
+	public String getMIN_YString()
+	{
+		return Double.toString(MIN_Y);
+	}
+	
+	public String getMAX_YString()
+	{
+		return Double.toString(MAX_Y);
+	}
+	
+	public String getMIN_ZString()
+	{
+		return Integer.toString(MIN_Z);
+	}
+	
+	public String getGAP_VALUEString()
+	{
+		return Integer.toString(GAP_VALUE);
+	}
+	
+	public String getMAX_X_SMOString()
+	{
+		return Double.toString(MAX_X_SMO);
+	}
+	
+	public String getMIN_X_SMOString()
+	{
+		return Double.toString(MIN_X_SMO);
+	}
+	
+	public String getMAX_Y_SMOString()
+	{
+		return Double.toString(MAX_Y_SMO);
+	}
+	
+	public String getMIN_Y_SMOString()
+	{
+		return Double.toString(MIN_Y_SMO);
+	}
+	
+	public String getMAX_Z_SMOString()
+	{
+		return Integer.toString(MAX_Z_SMO);
+	}
+
+	public String getMIN_Z_SMOString()
+	{
+		return Integer.toString(MIN_Z_SMO);
+	}
+	
+	public String getTOD_TIMEString() 
+	{
+		return Integer.toString(TOD_TIME);
+	}
+	
+	public String getTOC_TIMEString() 
+	
+	{
+		return Integer.toString(TOC_TIME);
+	}
+	
+	public String getTOC_ALTString()
+	{
+		return Integer.toString(TOC_ALT);
+	}
+
+	public String getEND_CENTER_TIMEString()
+	{
+		return Integer.toString(END_CENTER_TIME);
+	}
+	
+	public String getSTART_CENTER_TIMEString()
+	{
+		return Integer.toString(START_CENTER_TIME);
+	}
+	
+	public String getLOW_ZString()
+	{
+		return Integer.toString(LOW_Z);
+	}
+
+	public String getHIGH_ZString()
+		{
+			return Integer.toString(HIGH_Z);
+		}
+
+	public String getLOW_TIMEString()
+	{
+		return Integer.toString(LOW_TIME);
+	}
+
+	public String getHIGH_TIMEString()
+	{
+		return Integer.toString(HIGH_TIME);
+	}
+	
+	public String getBETWEEN_TIMEString()
+	{
+		return Integer.toString(BETWEEN_TIME);
+	}
+	
+	public String getAVG_CLIMBString()
+	{
+		return Double.toString(AVG_CLIMB);
+	}
+	
+	public String getLOW_GROUND_SPEED_SMOString()
+	{
+		return Integer.toString(LOW_GROUND_SPEED_SMO);
+	}
+	
+	public String getHIGH_GROUND_SPEED_SMOString()
+	{
+		return Integer.toString(HIGH_GROUND_SPEED_SMO);
 	}
 }
