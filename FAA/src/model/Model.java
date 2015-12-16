@@ -9,208 +9,224 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.List;
-
 import javax.swing.JOptionPane;
-
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-/**
- * TO DO FIX GENERATE GALAXY FILTER LIMIT APPENDING PROBLEM
- * DUPLICATES
- * LINE: 182: Error NuberFomatException
- * @author BenzX
- *
- */
-public class Model{
+
+public class Model
+{
 	private File targetFile;
-	//private ArrayList<SingleFlightData> universe;
-	//private ArrayList<DataSet> universe;
-	//private ArrayList<DataSet> galaxy;
 	private ArrayList<SingleFlightData> universe;
 	private ArrayList<SingleFlightData> galaxy;
 
-	public Model(){
+
+	public Model()
+	{
 		universe = new ArrayList<SingleFlightData>();
 		galaxy = new ArrayList<SingleFlightData>();
-		universe = new ArrayList<SingleFlightData>();
 	}
 
 
-	public ArrayList<SingleFlightData> getUniverse(){
+	public ArrayList<SingleFlightData> getUniverse()
+	{
 		return universe;
 	}
 
 
-	public ArrayList<SingleFlightData> getGalaxy(){
+	public ArrayList<SingleFlightData> getGalaxy()
+	{
 		return galaxy;
 	}
 
 
-	public void setFile(File newFile){	
+	public void setFile(File newFile)
+	{	
 		targetFile = newFile;
-		try {
+
+		try 
+		{
+			universe.clear();
 			generateUniverse();
 		}
-		catch (IOException e) {
+		catch (IOException e) 
+		{
 			e.printStackTrace();
 		}
 	}
 
-	public File getFile(){
+
+	public File getFile()
+	{
 		return targetFile;
 	}
 
 
-	public String generateGalaxyString(int limit){
-		/*
-		int strtEndDiff = getStart_Time()- getEnd_Time();
-		int strtAlt = getStart_Alt() - getEnd_Alt();
-		String neatString ="\n**************************************************************************************************************************************************************\n"
-						 +   "**************************************************************************************************************************************************************\n"
-						 +   "**  AC Number :        "+getAC_NUM()                                                           												           +" **\n"
-						 +   "**************************************************************************************************************************************************************\n"
-						 +   "**************************************************************************************************************************************************************\n"
-						 +   "**  AC List Info :     "+getAC_List_Info()                                                      										                   +" **\n"
-						 +   "******************     																																	  **\n"
-						 +   "**************************************************************************************************************************************************************\n"
-						 +   "**************************************************************************************************************************************************************\n"
-						 +   "**  Start Time :       "+getStart_Time()+"        **  "+"  End_Time :            "+getEnd_Time()+       "  **  Start_End_Time_Diff:  "+strtEndDiff+"        **\n"        			 
-						 +   "**************************************************************************************************************************************************************\n"
-						 +   "**************************************************************************************************************************************************************\n"
-					     +   "**  Actual Dept.Time : "+getActual_Dept_Time()+"  **  "+"  Original_Start_Time : "+getOrig_Start_Time()+"  **  Ground_Speed:         "+getGround_Speed()+"  **\n" 
-					     +   "**************************************************************************************************************************************************************\n"
-					     +   "**************************************************************************************************************************************************************\n"
-					     +   "**  Start Alt :        "+getStart_Alt()+"         **  "+"  End_Alt :             "+getEnd_Alt()        +"  **  Ground_Speed:         "+strtAlt+          "  **\n"
-						 +   "**************************************************************************************************************************************************************\n"
-						 +   "**************************************************************************************************************************************************************\n";;
-*/		
-						 
+	public String generateGalaxyString(int limit)
+	{
 		StringBuilder sb = new StringBuilder();
 		String display = "AC_NUM\tACID\tTRACK_CNT\tST_TIME\tEND_TIME\tORIG_ST_TIME\tORIG_END_TIME";
 		sb.append(display);
 
-		if(limit < universe.size()){
-			
-			for(int i = 0; i < limit; i++){
+		if((limit <= galaxy.size()) && (limit > -1))
+		{
+			for(int i = 0; i < limit; i++)
+			{
 				sb.append("\n");
-				sb.append(universe.get(i).getAC_NUM() + "\t");
-				sb.append(universe.get(i).getACID() + "\t");
-				sb.append(universe.get(i).getTRACK_CNT() + "\t");
-				sb.append(universe.get(i).getST_TIME() + "\t");
-				sb.append(universe.get(i).getEND_TIME() + "\t");
-				sb.append(universe.get(i).getORIG_ST_TIME() + "\t");
-				sb.append(universe.get(i).getORIG_END_TIME() + "\t");
-				sb.append(universe.get(i).getMAX_X() + "\t");
-				sb.append(universe.get(i).getMIN_X() + "\t");
-				sb.append(universe.get(i).getMAX_Y() + "\t");
-				sb.append(universe.get(i).getMIN_Y() + "\t");
-				sb.append(universe.get(i).getMAX_Z() + "\t");
-				sb.append(universe.get(i).getMIN_Z() + "\t");
-				sb.append(universe.get(i).getAC_EQUIP() + "\t");
-				sb.append(universe.get(i).getAC_TYPE() + "\t");
-				sb.append(universe.get(i).getDEST_FIX() + "\t");
-				sb.append(universe.get(i).getFLIGHT_TYPE() + "\t");
-				sb.append(universe.get(i).getORIGIN_FIX() + "\t");
-				sb.append(universe.get(i).getGAP_VALUE() + "\t");
-				sb.append(universe.get(i).getMAX_X_SMO() + "\t");
-				sb.append(universe.get(i).getMIN_X_SMO() + "\t");
-				sb.append(universe.get(i).getMAX_Y_SMO() + "\t");
-				sb.append(universe.get(i).getMIN_Y_SMO() + "\t");
-				sb.append(universe.get(i).getMAX_Z_SMO() + "\t");
-				sb.append(universe.get(i).getMIN_Z_SMO() + "\t");
-				sb.append(universe.get(i).getTOD_TIME() + "\t");
-				sb.append(universe.get(i).getTOC_TIME() + "\t");
-				sb.append(universe.get(i).getTOC_ALT() + "\t");
-				sb.append(universe.get(i).getSTART_CENTER() + "\t");
-				sb.append(universe.get(i).getEND_CENTER_TIME() + "\t");
-				sb.append(universe.get(i).getSTART_CENTER_TIME() + "\t");
-				sb.append(universe.get(i).getLOW_Z() + "\t");
-				sb.append(universe.get(i).getHIGH_Z() + "\t");
-				sb.append(universe.get(i).getLOW_TIME() + "\t");
-				sb.append(universe.get(i).getHIGH_TIME() + "\t");
-				sb.append(universe.get(i).getBETWEEN_TIME() + "\t");
-				sb.append(universe.get(i).getAVG_CLIMB() + "\t");
-				sb.append(universe.get(i).getLOW_GROUND_SPEED_SMO() + "\t");
-				sb.append(universe.get(i).getHIGH_GROUND_SPEED_SMO() + "\t");
+				sb.append(galaxy.get(i).getAC_NUM() + "\t");
+				sb.append(galaxy.get(i).getACID() + "\t");
+				sb.append(galaxy.get(i).getTRACK_CNT() + "\t");
+				sb.append(galaxy.get(i).getST_TIME() + "\t");
+				sb.append(galaxy.get(i).getEND_TIME() + "\t");
+				sb.append(galaxy.get(i).getORIG_ST_TIME() + "\t");
+				sb.append(galaxy.get(i).getORIG_END_TIME() + "\t");
+				sb.append(galaxy.get(i).getMAX_X() + "\t");
+				sb.append(galaxy.get(i).getMIN_X() + "\t");
+				sb.append(galaxy.get(i).getMAX_Y() + "\t");
+				sb.append(galaxy.get(i).getMIN_Y() + "\t");
+				sb.append(galaxy.get(i).getMAX_Z() + "\t");
+				sb.append(galaxy.get(i).getMIN_Z() + "\t");
+				sb.append(galaxy.get(i).getAC_EQUIP() + "\t");
+				sb.append(galaxy.get(i).getAC_TYPE() + "\t");
+				sb.append(galaxy.get(i).getDEST_FIX() + "\t");
+				sb.append(galaxy.get(i).getFLIGHT_TYPE() + "\t");
+				sb.append(galaxy.get(i).getORIGIN_FIX() + "\t");
+				sb.append(galaxy.get(i).getGAP_VALUE() + "\t");
+				sb.append(galaxy.get(i).getMAX_X_SMO() + "\t");
+				sb.append(galaxy.get(i).getMIN_X_SMO() + "\t");
+				sb.append(galaxy.get(i).getMAX_Y_SMO() + "\t");
+				sb.append(galaxy.get(i).getMIN_Y_SMO() + "\t");
+				sb.append(galaxy.get(i).getMAX_Z_SMO() + "\t");
+				sb.append(galaxy.get(i).getMIN_Z_SMO() + "\t");
+				sb.append(galaxy.get(i).getTOD_TIME() + "\t");
+				sb.append(galaxy.get(i).getTOC_TIME() + "\t");
+				sb.append(galaxy.get(i).getTOC_ALT() + "\t");
+				sb.append(galaxy.get(i).getSTART_CENTER() + "\t");
+				sb.append(galaxy.get(i).getEND_CENTER_TIME() + "\t");
+				sb.append(galaxy.get(i).getSTART_CENTER_TIME() + "\t");
+				sb.append(galaxy.get(i).getLOW_Z() + "\t");
+				sb.append(galaxy.get(i).getHIGH_Z() + "\t");
+				sb.append(galaxy.get(i).getLOW_TIME() + "\t");
+				sb.append(galaxy.get(i).getHIGH_TIME() + "\t");
+				sb.append(galaxy.get(i).getBETWEEN_TIME() + "\t");
+				sb.append(galaxy.get(i).getAVG_CLIMB() + "\t");
+				sb.append(galaxy.get(i).getLOW_GROUND_SPEED_SMO() + "\t");
+				sb.append(galaxy.get(i).getHIGH_GROUND_SPEED_SMO() + "\t");
 			}
+
 			return sb.toString();
 		}
-		else{
+		else
+		{
 			JOptionPane.showMessageDialog(null, "Limit larger than elements of file.");
 			return null;
 		}
-		
-	}
-	
-	public void generateGalaxy(){
-		galaxy = new ArrayList<SingleFlightData>(universe);
+
 	}
 
-	public void filterGalaxy(String ACID, String ST_TIME, String END_TIME, String AC_EQ, String AC_TYPE, String ORIGIN_FIX, String START_CENTER, String AVG_CLIMB) {
-		for(int i = 0; i < galaxy.size(); i++) {
-			if(!galaxy.get(i).getACID().contains(ACID)) {
+
+	public boolean filterGalaxy(String ACID, String ST_TIME, String END_TIME, String AC_EQ, 
+			String AC_TYPE, String ORIGIN_FIX, String START_CENTER, String AVG_CLIMB) 
+	{
+		boolean hasChanged = false;
+
+		for(int i = 0; i < galaxy.size(); i++) 
+		{
+			if(!galaxy.get(i).getACID().contains(ACID))
+			{
 				galaxy.remove(galaxy.get(i));
 				i--;
+				hasChanged = true;
 			}
-			if(!galaxy.get(i).getST_TIMEString().contains(ST_TIME)) {
+
+			else if(!galaxy.get(i).getST_TIMEString().contains(ST_TIME)) 
+			{
 				galaxy.remove(galaxy.get(i));
 				i--;
+				hasChanged = true;
 			}
-			if(!galaxy.get(i).getORIG_END_TIMEString().contains(END_TIME)) {
+
+			else if(!galaxy.get(i).getEND_TIMEString().contains(END_TIME))
+			{
 				galaxy.remove(galaxy.get(i));
 				i--;
+				hasChanged = true;
 			}
-			if(!galaxy.get(i).getAC_EQUIP().contains(AC_EQ)) {
+
+			else if(!galaxy.get(i).getAC_EQUIP().contains(AC_EQ)) 
+			{
 				galaxy.remove(galaxy.get(i));
 				i--;
+				hasChanged = true;
 			}
-			if(!galaxy.get(i).getAC_TYPE().contains(AC_TYPE)) {
+
+			else if(!galaxy.get(i).getAC_TYPE().contains(AC_TYPE)) 
+			{
 				galaxy.remove(galaxy.get(i));
 				i--;
+				hasChanged = true;
 			}
-			if(!galaxy.get(i).getORIGIN_FIX().contains(ORIGIN_FIX)) {
+
+			else if(!galaxy.get(i).getSTART_CENTER().contains(START_CENTER)) 
+			{
 				galaxy.remove(galaxy.get(i));
 				i--;
+				hasChanged = true;
 			}
-			if(!galaxy.get(i).getSTART_CENTER().contains(START_CENTER)) {
+
+			else if(!galaxy.get(i).getEND_TIMEString().contains(END_TIME)) 
+			{
 				galaxy.remove(galaxy.get(i));
 				i--;
+				hasChanged = true;
 			}
-			if(!galaxy.get(i).getAVG_CLIMBString().contains(AVG_CLIMB)) {
+
+			else if(!galaxy.get(i).getAVG_CLIMBString().contains(AVG_CLIMB)) 
+			{
 				galaxy.remove(galaxy.get(i));
 				i--;
+				hasChanged = true;
 			}
-			//String ACID, String ST_TIME, String END_TIME, String AC_EQ, 
-			//String AC_TYPE, String ORIGIN_FIX, String START_CENTER, String AVG_CLIMB
 		}
+
+		return hasChanged;
 	}
-	
-	public void writeData(File selectedFile) throws IOException{
+
+
+	public void writeData(File selectedFile) throws IOException
+	{
 		StringBuilder sb = new StringBuilder();
-        FileWriter writer = new FileWriter(selectedFile);
-        galaxy = universe;
-        System.out.println(galaxy.toString());
+		BufferedWriter writer = new BufferedWriter(new FileWriter(selectedFile));
+		galaxy = universe;
+		System.out.println(galaxy.toString());
+
 		for(SingleFlightData ifd: galaxy)
 		{
-			System.out.println(ifd.toString() + "\n");
 			sb.append(ifd.toString() + "\n");
 		}
 
 		writer.write(sb.toString());
-        writer.flush();
-        writer.close();
+		writer.close();
 	}
 
 
-	public void generateUniverse() throws IOException{
+	public void generateGalaxy() 
+	{
+		galaxy = new ArrayList<SingleFlightData>(universe);
+	}
+
+
+	public void generateUniverse() throws IOException
+	{
 		BufferedReader reader = new BufferedReader(new FileReader(targetFile));
 		String temp = reader.readLine();
 
-		while((temp = reader.readLine()) != null){	
+		while((temp = reader.readLine()) != null)
+		{	
 			SingleFlightData newFlight = new SingleFlightData();
 			String[] data = temp.split(",");
 			newFlight.setAC_NUM(Integer.parseInt(data[0]));
@@ -256,19 +272,24 @@ public class Model{
 
 			universe.add(newFlight);
 		}
+
 		reader.close();
+		generateGalaxy();
 	}
 
-	
-	public ArrayList<SingleFlightData> getuniverse() {
+
+	public ArrayList<SingleFlightData> getuniverse() 
+	{
 		return universe;
 	}
 
 
-	public String generateUniverseString(){
+	public String generateUniverseString()
+	{
 		String display = "AC_NUM\tACID\tTRACK_CNT\tST_TIME\tEND_TIME\tORIG_ST_TIME\tORIG_END_TIME";
 
-		for(int i = 0; i < 500; i++){
+		for(int i = 0; i < 500; i++)
+		{
 			display += "\n";
 			display += (universe.get(i).getAC_NUM() + "\t");
 			display += (universe.get(i).getACID() + "\t");
@@ -311,125 +332,164 @@ public class Model{
 			display += (universe.get(i).getLOW_GROUND_SPEED_SMO() + "\t");
 			display += (universe.get(i).getHIGH_GROUND_SPEED_SMO() + "\t");
 		}
-		
+
 		return display;
 	}
-	 
-	public Map<String, Integer> GetPlanes() {
+
+
+	public Map<String, Integer> GetPlanes() 
+	{
 		Map<String, Integer> planes = new HashMap<>();
 		Map<String, Integer> sortedMap = new HashMap<>();
-		String plane = null;
-		int size = universe.size();
-		for (int i = 0; i < size; i++) {
-			plane = universe.get(i).getAC_TYPE();
-			if (planes.containsKey(plane)) {
+		String plane = "";
+		int size = galaxy.size();
+
+		for (int i = 0; i < size; i++) 
+		{
+			plane = galaxy.get(i).getAC_TYPE();
+
+			if (planes.containsKey(plane)) 
+			{
 				planes.put(plane, planes.get(plane) + 1);
-			} else {
+			} 
+			else 
+			{
 				planes.put(plane, 1);
 			}
 		}
 
 		sortedMap = sortHashMap(planes);
-
 		return sortedMap;
 	}
 
-	public Map<String, Integer> GetDestinations() {
+
+	public Map<String, Integer> GetDestinations() 
+	{
 		Map<String, Integer> destinations = new HashMap<>();
 		Map<String, Integer> sortedMap = new HashMap<>();
-		String plane = null;
-		int size = universe.size();
-		for (int i = 0; i < size; i++) {
-			plane = universe.get(i).getDEST_FIX();
-			if (destinations.containsKey(plane)) {
+		String plane = "";
+		int size = galaxy.size();
+
+		for (int i = 0; i < size; i++) 
+		{
+			plane = galaxy.get(i).getDEST_FIX();
+
+			if(destinations.containsKey(plane))
+			{
 				destinations.put(plane, destinations.get(plane) + 1);
-			} else {
+			}
+			else 
+			{
 				destinations.put(plane, 1);
 			}
 		}
 
 		sortedMap = sortHashMap(destinations);
-
 		return sortedMap;
 	}
 
-	public Map<String, Integer> GetFlights() {
+
+	public Map<String, Integer> GetFlights() 
+	{
 		Map<String, Integer> flightTypes = new HashMap<>();
 		Map<String, Integer> sortedMap = new HashMap<>();
-		String plane = null;
-		int size = universe.size();
-		for (int i = 0; i < size; i++) {
-			plane = universe.get(i).getFLIGHT_TYPE();
-			if (flightTypes.containsKey(plane)) {
+		String plane = "";
+		int size = galaxy.size();
+
+		for (int i = 0; i < size; i++) 
+		{
+			plane = galaxy.get(i).getFLIGHT_TYPE();
+
+			if(flightTypes.containsKey(plane)) 
+			{
 				flightTypes.put(plane, flightTypes.get(plane) + 1);
-			} else {
+			}
+			else 
+			{
 				flightTypes.put(plane, 1);
 			}
 		}
-	
+
 		sortedMap = sortHashMap(flightTypes);
-	
 		return sortedMap;
 	}
 
-	public Map<String, Integer> GetOrigins() {
+
+	public Map<String, Integer> GetOrigins() 
+	{
 		Map<String, Integer> originFix = new HashMap<>();
 		Map<String, Integer> sortedMap = new HashMap<>();
-		String plane = null;
-		int size = universe.size();
-		for (int i = 0; i < size; i++) {
-			plane = universe.get(i).getORIGIN_FIX();
-			if (originFix.containsKey(plane)) {
+		String plane = "";
+		int size = galaxy.size();
+
+		for (int i = 0; i < size; i++) 
+		{
+			plane = galaxy.get(i).getORIGIN_FIX();
+
+			if(originFix.containsKey(plane))
+			{
 				originFix.put(plane, originFix.get(plane) + 1);
-			} else {
+			}
+			else 
+			{
 				originFix.put(plane, 1);
 			}
 		}
-	
+
 		sortedMap = sortHashMap(originFix);
-	
 		return sortedMap;
 	}
 
-	public Map<String, Integer> GetStarts() {
+
+	public Map<String, Integer> GetStarts() 
+	{
 		Map<String, Integer> startCenter = new HashMap<>();
 		Map<String, Integer> sortedMap = new HashMap<>();
-		String plane = null;
-		int size = universe.size();
-		for (int i = 0; i < size; i++) {
-			plane = universe.get(i).getSTART_CENTER();
-			if (startCenter.containsKey(plane)) {
+		String plane = "";
+		int size = galaxy.size();
+
+		for(int i = 0; i < size; i++) 
+		{
+			plane = galaxy.get(i).getSTART_CENTER();
+
+			if(startCenter.containsKey(plane))
+			{
 				startCenter.put(plane, startCenter.get(plane) + 1);
-			} else {
+			}
+			else 
+			{
 				startCenter.put(plane, 1);
 			}
 		}
-	
+
 		sortedMap = sortHashMap(startCenter);
-	
 		return sortedMap;
 	}
 
-	private static Map<String, Integer> sortHashMap(Map<String, Integer> unsortMap) {
 
-		// Convert Map to List
+	private static Map<String, Integer> sortHashMap(Map<String, Integer> unsortMap) 
+	{
 		List<Map.Entry<String, Integer>> list = 
-			new LinkedList<Map.Entry<String, Integer>>(unsortMap.entrySet());
+				new LinkedList<Map.Entry<String, Integer>>(unsortMap.entrySet());
 
-		// Sort list with comparator, to compare the Map values
-		Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+		Collections.sort(list, new Comparator<Map.Entry<String, Integer>>()
+				{
 			public int compare(Map.Entry<String, Integer> o1,
-                                           Map.Entry<String, Integer> o2) {
-				return (o2.getValue()).compareTo(o1.getValue());
+					Map.Entry<String, Integer> o2) 
+			{
+				return(o2.getValue()).compareTo(o1.getValue());
 			}
-		});
+				});
 
-		// Convert sorted map back to a Map
 		Map<String, Integer> sortedMap = new LinkedHashMap<String, Integer>();
-		for (Iterator<Map.Entry<String, Integer>> it = list.iterator(); it.hasNext();) {
+
+		for(Iterator<Map.Entry<String, Integer>> it = list.iterator();
+				it.hasNext();)
+		{
 			Map.Entry<String, Integer> entry = it.next();
 			sortedMap.put(entry.getKey(), entry.getValue());
 		}
+
 		return sortedMap;
 	}
 
